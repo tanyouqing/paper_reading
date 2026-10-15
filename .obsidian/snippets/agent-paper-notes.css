@@ -1,0 +1,22 @@
+/* Optional Obsidian CSS snippet. Scoped by frontmatter cssclasses. */
+.paper-note {
+  --file-line-width: 920px;
+  --line-height-normal: 1.75;
+  --h1-color: var(--text-accent);
+  --h2-color: var(--text-normal);
+  --table-header-background: var(--background-secondary);
+}
+.paper-note h1 { letter-spacing: -.025em; }
+.paper-note h2 { margin-top: 2em; padding-bottom: .35em; border-bottom: 1px solid var(--background-modifier-border); }
+.paper-note h3 { margin-top: 1.6em; }
+.paper-note .callout { border-radius: 10px; border: 1px solid var(--background-modifier-border); }
+.paper-note table { font-size: .92em; width: 100%; }
+.paper-note th, .paper-note td { padding: .65em .8em; }
+.paper-note tbody tr:nth-child(even) { background: var(--background-secondary-alt); }
+.paper-note code { border-radius: 4px; }
+.paper-note .internal-link { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.paper-index .callout[data-callout="abstract"] { --callout-color: 45, 150, 145; }
+@media print {
+  .paper-note { --file-line-width: 100%; }
+  .paper-note h2, .paper-note h3 { break-after: avoid; }
+}
