@@ -1,0 +1,17 @@
+# OS and local temporary files
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+__pycache__/
+.trash/
+
+# Credentials and local environment files
+.env
+.env.*
+!.env.example
+
+# Device-specific Obsidian state (already tracked files remain tracked)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
