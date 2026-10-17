@@ -10,9 +10,12 @@ cssclasses:
 # 论文阅读与研究资料
 
 > [!abstract] 从论文到可复用的研究理解
-> 关注智能体记忆、经验复用、多智能体协作与工作流优化。论文精读和导入观点分别保存，通过索引相互关联。
+> 关注智能体记忆、经验复用、多智能体协作、工作流优化与 Agentic RL。论文精读和导入观点分别保存，通过索引相互关联。
 
 ## 从这里开始
+
+- [[00-Agentic-RL|Agentic RL · 论文地图与 19 篇阅读队列]]：规划、工具使用、记忆、自我改进与推理。
+- [[RAP-2023-Reasoning-via-Planning|RAP]]：EMNLP 2023，以世界模型和 MCTS 搜索本题推理路径；LLM 权重不变。
 
 - [[00-Agent-Memory-Experience-Reuse|智能体记忆与经验复用 · 论文索引]]：论文分类、核心总结与比较。
 - [[AFlow-2025-Workflow-Optimization|AFlow]]：从验证反馈出发，修改代码形式的智能体工作流。
@@ -25,6 +28,8 @@ cssclasses:
 
 GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
+- [Agentic RL 索引与队列](Agentic%20RL/00-Agentic-RL.md)
+- [RAP 精读](Agentic%20RL/RAP-2023-Reasoning-via-Planning.md)
 - [论文索引](Agent%20Memory%26Experience%20Reuse/00-Agent-Memory-Experience-Reuse.md)
 - [AFlow 精读](Agent%20Memory%26Experience%20Reuse/AFlow-2025-Workflow-Optimization.md)
 - [G-Memory 精读](Agent%20Memory%26Experience%20Reuse/G-Memory-2025-Hierarchical-Memory.md)
@@ -34,11 +39,11 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 ## 笔记组织与增量维护
 
-论文笔记位于 `Agent Memory&Experience Reuse/`；导入资料位于 `XHS Notes/`，媒体仍使用原有相对路径。
+智能体记忆与经验复用笔记位于 `Agent Memory&Experience Reuse/`，Agentic RL 笔记位于 `Agentic RL/`；导入资料位于 `XHS Notes/`，媒体仍使用原有相对路径。
 
 每篇精读重点说明出发点、创新、架构、方法、输入输出、benchmark、评测与局限。论文事实、代码行为、教学例子和研究逻辑重建分开标识；不把推测写成作者结论。
 
-新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。四篇论文均已完成精读整理；原文通过各笔记的官方链接访问。
+新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的四篇论文及 Agentic RL 主题的 RAP 均已完成精读整理；原文通过各笔记的官方链接访问。
 
 ## 内容维护规范
 
