@@ -22,6 +22,7 @@ cssclasses:
 - [[G-Memory-2025-Hierarchical-Memory|G-Memory]]：组织历史任务与抽象经验，为新任务提供记忆。
 - [[Agent Workflow Memory|AWM]]：ICML 2025，从历史轨迹提炼工作流记忆；含在线/离线机制、两类网页评测与代码核对。
 - [[GPTSwarm-2024-Optimizable-Agent-Graphs|GPTSwarm]]：ICML 2024，用任务奖励学习多智能体连边概率；区分外部策略 RL、节点示例和模型训练。
+- [[MemEvolve-2026-Memory-System-Meta-Evolution|MemEvolve]]：ICML 2026，执行轨迹驱动记忆模块代码进化；含经验图检索、跨任务评测与实现边界。
 - [[XHS Notes/知识/Agent Memory 些许感悟|Agent Memory 些许感悟]]：已有导入随笔与配图。
 
 ## GitHub 浏览入口
@@ -35,6 +36,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 - [G-Memory 精读](Agent%20Memory%26Experience%20Reuse/G-Memory-2025-Hierarchical-Memory.md)
 - [AWM 精读](Agent%20Memory%26Experience%20Reuse/Agent%20Workflow%20Memory.md)
 - [GPTSwarm 精读](Agent%20Memory%26Experience%20Reuse/GPTSwarm-2024-Optimizable-Agent-Graphs.md)
+- [MemEvolve 精读](Agent%20Memory%26Experience%20Reuse/MemEvolve-2026-Memory-System-Meta-Evolution.md)
 - [Agent Memory 导入随笔](XHS%20Notes/知识/Agent%20Memory%20些许感悟.md)
 
 ## 笔记组织与增量维护
@@ -43,7 +45,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 每篇精读重点说明出发点、创新、架构、方法、输入输出、benchmark、评测与局限。论文事实、代码行为、教学例子和研究逻辑重建分开标识；不把推测写成作者结论。
 
-新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的四篇论文及 Agentic RL 主题的 RAP 均已完成精读整理；原文通过各笔记的官方链接访问。
+新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的五篇论文及 Agentic RL 主题的 RAP 均已完成精读整理；原文通过各笔记的官方链接访问。
 
 ## 内容维护规范
 
