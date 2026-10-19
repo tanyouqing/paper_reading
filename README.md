@@ -16,6 +16,7 @@ cssclasses:
 
 - [[00-Agentic-RL|Agentic RL · 论文地图与 19 篇阅读队列]]：规划、工具使用、记忆、自我改进与推理。
 - [[RAP-2023-Reasoning-via-Planning|RAP]]：EMNLP 2023，以世界模型和 MCTS 搜索本题推理路径；LLM 权重不变。
+- [[LATS-2024-Language-Agent-Tree-Search|LATS]]：ICML 2024，环境反馈驱动树搜索与反思；含 oracle 和编程测试隔离边界。
 
 - [[00-Agent-Memory-Experience-Reuse|智能体记忆与经验复用 · 论文索引]]：论文分类、核心总结与比较。
 - [[AFlow-2025-Workflow-Optimization|AFlow]]：从验证反馈出发，修改代码形式的智能体工作流。
@@ -31,6 +32,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 - [Agentic RL 索引与队列](Agentic%20RL/00-Agentic-RL.md)
 - [RAP 精读](Agentic%20RL/RAP-2023-Reasoning-via-Planning.md)
+- [LATS 精读](Agentic%20RL/LATS-2024-Language-Agent-Tree-Search.md)
 - [论文索引](Agent%20Memory%26Experience%20Reuse/00-Agent-Memory-Experience-Reuse.md)
 - [AFlow 精读](Agent%20Memory%26Experience%20Reuse/AFlow-2025-Workflow-Optimization.md)
 - [G-Memory 精读](Agent%20Memory%26Experience%20Reuse/G-Memory-2025-Hierarchical-Memory.md)
@@ -45,7 +47,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 每篇精读重点说明出发点、创新、架构、方法、输入输出、benchmark、评测与局限。论文事实、代码行为、教学例子和研究逻辑重建分开标识；不把推测写成作者结论。
 
-新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的五篇论文及 Agentic RL 主题的 RAP 均已完成精读整理；原文通过各笔记的官方链接访问。
+新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的五篇论文及 Agentic RL 主题的 RAP、LATS 均已完成精读整理；原文通过各笔记的官方链接访问。
 
 ## 内容维护规范
 

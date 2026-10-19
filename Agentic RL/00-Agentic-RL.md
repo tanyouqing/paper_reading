@@ -9,7 +9,7 @@ tags:
 cssclasses:
   - paper-note
   - paper-index
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 # Agentic RL：论文地图与阅读队列
@@ -18,15 +18,16 @@ updated: 2026-10-17
 
 > [!abstract] 阅读目标
 > 理解语言模型智能体如何规划、调用工具、处理长程反馈，以及如何通过强化学习改善策略。先分清推理时搜索、外部记忆更新、外部策略训练与 LLM 参数训练，再比较论文。
-> 已完成 1/19 篇：RAP。下一篇：LATS。仅在完成实质精读后标记完成。
+> 已完成 2/19 篇：RAP、LATS。下一篇：VOYAGER。仅在完成实质精读后标记完成。
 
 ## 已完成论文
 
 | 笔记 | 发表 | 类别 | 核心机制 | 改变什么 |
 | --- | --- | --- | --- | --- |
 | [[RAP-2023-Reasoning-via-Planning\|RAP]] | EMNLP 2023 主会 | 规划、世界模型、推理时搜索 | 冻结 LLM 提出动作并预测状态，MCTS 利用过程奖励选择分支 | 当前题搜索树的价值与访问记录；LLM 权重不变 |
+| [[LATS-2024-Language-Agent-Tree-Search\|LATS]] | ICML 2024 主会 | 规划、环境交互、搜索、反思 | 冻结 LLM 提出候选、评价观察、总结失败；MCTS 复用前缀 | 本题搜索统计与反思上下文；非 LLM 参数训练 |
 
-[在 GitHub 阅读 RAP](RAP-2023-Reasoning-via-Planning.md)
+[在 GitHub 阅读 RAP](RAP-2023-Reasoning-via-Planning.md) · [LATS 精读](LATS-2024-Language-Agent-Tree-Search.md)
 
 ## 按图片顺序的 19 篇队列
 
@@ -35,8 +36,8 @@ updated: 2026-10-17
 | 顺序 | 图片分组 | 论文简称 | 状态 |
 | --- | --- | --- | --- |
 | 1 | Planning | [[RAP-2023-Reasoning-via-Planning\|RAP]] | 完成精读 |
-| 2 | Planning | LATS | 待读，下一篇 |
-| 3 | Planning | VOYAGER | 待读 |
+| 2 | Planning | [[LATS-2024-Language-Agent-Tree-Search\|LATS]] | 完成精读 |
+| 3 | Planning | VOYAGER | 待读，下一篇 |
 | 4 | Planning | Planner-R1 | 待读 |
 | 5 | Tool Use | ToolRL | 待读 |
 | 6 | Tool Use | ARTIST | 待读 |
@@ -68,6 +69,14 @@ updated: 2026-10-17
 
 RAP 中树节点表示任务状态，AFlow 的搜索节点表示工作流候选，GPTSwarm 操作节点执行 LLM/工具调用；这些图的层级与语义不同。
 
+## RAP → LATS：从预测状态到观察环境
+
+- **RAP**：LLM 充当世界模型预测后续状态，以过程奖励搜索当前题路径。
+- **LATS**：在可回退环境中执行候选动作，观察实际结果，并把失败反思放回本题后续尝试；纯推理任务也保留 CoT 版本。
+- 两者均不训练基础模型权重，搜索树也不是多智能体通信图。LATS 的“记忆”主要在同题跨尝试复用，不能自动视为跨任务长期经验库。
+- **评测边界**：LATS 的 HotpotQA 采用答案正误 oracle；公开编程实现搜索途中调用正式测试，和论文“最后才评正式测试”的描述有差异。WebShop Score 75.9 / SR 38%，不能只凭平均分断言完全成功率优于所有微调方法。
+- **复现边界**：论文与当前代码在测试数、深度、迭代数、评分及树统计上存在差异，详见独立笔记。
+
 ## 阅读与维护规范
 
 - 先讲作者做了什么、输入输出、一个贯穿例子，再解释模块和公式。
@@ -81,3 +90,6 @@ RAP 中树节点表示任务状态，AFlow 的搜索节点表示工作流候选�
 ## 本次核对范围
 
 2026-10-17：读取 main 的 README、模板、记忆主题索引、文件树及已有 GPTSwarm 笔记；结合当前聊天的图片队列去重。四篇既有记忆主题笔记保留，RAP 为新主题第一篇。RAP 有正文/表格数字冲突及现代代码与历史配置差异，详见精读。
+
+
+2026-10-19：完成 LATS 会议最终版与关键附录精读，核对官方代码 853d816；新增独立笔记并保留 oracle、正式测试调用、配置/数字冲突。未实际运行复现。队列下一篇 VOYAGER。
