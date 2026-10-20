@@ -18,6 +18,8 @@ cssclasses:
 - [[RAP-2023-Reasoning-via-Planning|RAP]]：EMNLP 2023，以世界模型和 MCTS 搜索本题推理路径；LLM 权重不变。
 - [[LATS-2024-Language-Agent-Tree-Search|LATS]]：ICML 2024，环境反馈驱动树搜索与反思；含 oracle 和编程测试隔离边界。
 
+- [[CB-PbRL-2026-Constrained-Bilevel-Preference-RL|CB-PbRL]]：队列外补充；NeurIPS 2026已录用，奖励/成本与策略的双层优化，全文与实验待核验。
+
 - [[00-Agent-Memory-Experience-Reuse|智能体记忆与经验复用 · 论文索引]]：论文分类、核心总结与比较。
 - [[AFlow-2025-Workflow-Optimization|AFlow]]：从验证反馈出发，修改代码形式的智能体工作流。
 - [[G-Memory-2025-Hierarchical-Memory|G-Memory]]：组织历史任务与抽象经验，为新任务提供记忆。
@@ -33,6 +35,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 - [Agentic RL 索引与队列](Agentic%20RL/00-Agentic-RL.md)
 - [RAP 精读](Agentic%20RL/RAP-2023-Reasoning-via-Planning.md)
 - [LATS 精读](Agentic%20RL/LATS-2024-Language-Agent-Tree-Search.md)
+- [CB-PbRL 补充笔记](Agentic%20RL/CB-PbRL-2026-Constrained-Bilevel-Preference-RL.md)
 - [论文索引](Agent%20Memory%26Experience%20Reuse/00-Agent-Memory-Experience-Reuse.md)
 - [AFlow 精读](Agent%20Memory%26Experience%20Reuse/AFlow-2025-Workflow-Optimization.md)
 - [G-Memory 精读](Agent%20Memory%26Experience%20Reuse/G-Memory-2025-Hierarchical-Memory.md)
@@ -47,7 +50,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 每篇精读重点说明出发点、创新、架构、方法、输入输出、benchmark、评测与局限。论文事实、代码行为、教学例子和研究逻辑重建分开标识；不把推测写成作者结论。
 
-新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的五篇论文及 Agentic RL 主题的 RAP、LATS 均已完成精读整理；原文通过各笔记的官方链接访问。
+新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的五篇论文及 Agentic RL 主题的 RAP、LATS 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL为队列外资料笔记，目前保留全文待核验状态，不计入已完成精读或固定队列进度。
 
 ## 内容维护规范
 

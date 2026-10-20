@@ -9,7 +9,7 @@ tags:
 cssclasses:
   - paper-note
   - paper-index
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
 # Agentic RL：论文地图与阅读队列
@@ -28,6 +28,16 @@ updated: 2026-10-19
 | [[LATS-2024-Language-Agent-Tree-Search\|LATS]] | ICML 2024 主会 | 规划、环境交互、搜索、反思 | 冻结 LLM 提出候选、评价观察、总结失败；MCTS 复用前缀 | 本题搜索统计与反思上下文；非 LLM 参数训练 |
 
 [在 GitHub 阅读 RAP](RAP-2023-Reasoning-via-Planning.md) · [LATS 精读](LATS-2024-Language-Agent-Tree-Search.md)
+
+## 队列外补充阅读
+
+本栏记录临时指定论文，不计入19篇队列，不改变定时任务或下一篇。固定队列仍为2/19，下一篇VOYAGER。
+
+| 笔记 | 发表状态 | 主题与核心机制 | 核验状态 |
+| --- | --- | --- | --- |
+| [[CB-PbRL-2026-Constrained-Bilevel-Preference-RL\|CB-PbRL]] | NeurIPS 2026主会已录用，官方Poster条目 | 上层学习奖励/成本，下层优化受约束策略；双层响应与对偶变量 | 用户已读；本次已核验录用信息与摘要，完整正文/实验待核验，未标记全文精读完成 |
+
+[在GitHub阅读CB-PbRL笔记](CB-PbRL-2026-Constrained-Bilevel-Preference-RL.md)
 
 ## 按图片顺序的 19 篇队列
 
@@ -93,3 +103,5 @@ RAP 中树节点表示任务状态，AFlow 的搜索节点表示工作流候选�
 
 
 2026-10-19：完成 LATS 会议最终版与关键附录精读，核对官方代码 853d816；新增独立笔记并保留 oracle、正式测试调用、配置/数字冲突。未实际运行复现。队列下一篇 VOYAGER。
+
+2026-10-20：按用户一次性请求新增CB-PbRL资料笔记，确认NeurIPS 2026录用；全文受访问验证限制，已明确证据范围和未核验项。单列队列外补充，不计入2/19；下一篇及定时任务保持不变。
