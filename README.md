@@ -18,7 +18,7 @@ cssclasses:
 - [[RAP-2023-Reasoning-via-Planning|RAP]]：EMNLP 2023，以世界模型和 MCTS 搜索本题推理路径；LLM 权重不变。
 - [[LATS-2024-Language-Agent-Tree-Search|LATS]]：ICML 2024，环境反馈驱动树搜索与反思；含 oracle 和编程测试隔离边界。
 
-- [[CB-PbRL-2026-Constrained-Bilevel-Preference-RL|CB-PbRL]]：队列外补充；NeurIPS 2026已录用，奖励/成本与策略的双层优化，全文与实验待核验。
+- [[CB-PbRL-2026-Constrained-Bilevel-Preference-RL|CB-PbRL]]：队列外精读；基于上传的CB-RLHF全文，整理多维偏好、约束双层优化、MuJoCo实验与理论边界；另注明NeurIPS录用版本。
 
 - [[00-Agent-Memory-Experience-Reuse|智能体记忆与经验复用 · 论文索引]]：论文分类、核心总结与比较。
 - [[AFlow-2025-Workflow-Optimization|AFlow]]：从验证反馈出发，修改代码形式的智能体工作流。
@@ -52,7 +52,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 每篇精读重点说明出发点、创新、架构、方法、输入输出、benchmark、评测与局限。论文事实、代码行为、教学例子和研究逻辑重建分开标识；不把推测写成作者结论。
 
-新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的六篇论文及 Agentic RL 主题的 RAP、LATS 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL为队列外资料笔记，目前保留全文待核验状态，不计入已完成精读或固定队列进度。
+新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的六篇论文及 Agentic RL 主题的 RAP、LATS 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。固定队列进度仍为2/19，下一篇VOYAGER。
 
 ## 内容维护规范
 
