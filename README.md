@@ -18,6 +18,8 @@ cssclasses:
 - [[RAP-2023-Reasoning-via-Planning|RAP]]：EMNLP 2023，以世界模型和 MCTS 搜索本题推理路径；LLM 权重不变。
 - [[LATS-2024-Language-Agent-Tree-Search|LATS]]：ICML 2024，环境反馈驱动树搜索与反思；含 oracle 和编程测试隔离边界。
 
+- [[VOYAGER-2024-Executable-Skill-Lifelong-Agent|VOYAGER]]：TMLR 2024，自动课程与可执行技能库；区分程序积累、成功判定和模型参数训练。
+
 - [[CB-PbRL-2026-Constrained-Bilevel-Preference-RL|CB-PbRL]]：队列外精读；基于上传的CB-RLHF全文，整理多维偏好、约束双层优化、MuJoCo实验与理论边界；另注明NeurIPS录用版本。
 
 - [[00-Agent-Memory-Experience-Reuse|智能体记忆与经验复用 · 论文索引]]：论文分类、核心总结与比较。
@@ -36,6 +38,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 - [Agentic RL 索引与队列](Agentic%20RL/00-Agentic-RL.md)
 - [RAP 精读](Agentic%20RL/RAP-2023-Reasoning-via-Planning.md)
 - [LATS 精读](Agentic%20RL/LATS-2024-Language-Agent-Tree-Search.md)
+- [VOYAGER 精读](Agentic%20RL/VOYAGER-2024-Executable-Skill-Lifelong-Agent.md)
 - [CB-PbRL 补充笔记](Agentic%20RL/CB-PbRL-2026-Constrained-Bilevel-Preference-RL.md)
 - [论文索引](Agent%20Memory%26Experience%20Reuse/00-Agent-Memory-Experience-Reuse.md)
 - [AFlow 精读](Agent%20Memory%26Experience%20Reuse/AFlow-2025-Workflow-Optimization.md)
@@ -52,7 +55,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 每篇精读重点说明出发点、创新、架构、方法、输入输出、benchmark、评测与局限。论文事实、代码行为、教学例子和研究逻辑重建分开标识；不把推测写成作者结论。
 
-新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的六篇论文及 Agentic RL 主题的 RAP、LATS 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。固定队列进度仍为2/19，下一篇VOYAGER。
+新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的六篇论文及 Agentic RL 主题的 RAP、LATS、VOYAGER 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。固定队列进度为3/19，下一篇Planner-R1。
 
 ## 内容维护规范
 
@@ -75,3 +78,4 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 在本地仓库执行 `git pull --ff-only` 获取远程更新；编辑后提交并推送自己的修改。若本地有未提交变更或双方修改冲突，先处理本地改动，再同步，不强制覆盖。
 
 已移除初始欢迎页和 AWM 的本地 PDF，使用官方论文链接；已有随笔、图片和插件保留。此仓库当前为公开仓库。
+
