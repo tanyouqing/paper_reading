@@ -17,7 +17,7 @@ cssclasses:
 updated: 2026-10-16
 ---
 
-[[00-Agent-Memory-Experience-Reuse|← 论文索引]] · [[AFlow-2025-Workflow-Optimization|对照 AFlow]] · [[G-Memory-2025-Hierarchical-Memory|对照 G-Memory]] · [[Agent Workflow Memory|对照 AWM]]
+[[00-Agent-Memory-Experience-Reuse|← 论文索引]] · [[AFlow-2025-Workflow-Optimization|对照 AFlow]] · [[G-Memory-2025-Hierarchical-Memory|对照 G-Memory]] · [[AWM-2025-Workflow-Memory|对照 AWM]]
 
 # GPTSwarm：把语言智能体及其协作建模为可优化计算图
 
@@ -286,7 +286,7 @@ Table 1 中 GPTSwarm 总体准确率 18.45%，GPT-4-Turbo 基线 9.70%。GPTSwar
 | RL 强化 | **直接相关但对象有限**：强化外部连边策略，不强化 LLM 权重 |
 | 参数蒸馏 | **未覆盖**：没有把经验蒸馏进基础模型 |
 
-与 [[AFlow-2025-Workflow-Optimization|AFlow]] 相比，它的搜索空间更受约束、更新更数值化；与 [[G-Memory-2025-Hierarchical-Memory|G-Memory]] 相比，它的图会直接决定调用依赖；与 [[Agent Workflow Memory|AWM]] 相比，它不以跨网页任务的抽象子流程记忆为中心。
+与 [[AFlow-2025-Workflow-Optimization|AFlow]] 相比，它的搜索空间更受约束、更新更数值化；与 [[G-Memory-2025-Hierarchical-Memory|G-Memory]] 相比，它的图会直接决定调用依赖；与 [[AWM-2025-Workflow-Memory|AWM]] 相比，它不以跨网页任务的抽象子流程记忆为中心。
 
 **一个小实验建议（研究提议，非论文结论）**：固定同一模型与三个角色，在独立训练/验证/测试题集上比较单 agent、人工固定图、边数相近的随机图、REINFORCE 学图。控制总 token 预算，记录准确率、每题费用、延迟及跨题型成绩，运行多个种子。先验证“学到结构”能否在新题上超过“多调用几次”，再加入由任务记忆预测连边概率的扩展。
 

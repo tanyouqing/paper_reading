@@ -23,7 +23,7 @@ updated: 2026-10-20
 | --- | --- | --- | --- | --- |
 | [[AFlow-2025-Workflow-Optimization\|AFlow]] | ICLR 2025 主会 | 工作流搜索、Harness 优化、搜索经验复用 | LLM 修改可执行 Python 工作流，用验证集分数和树形搜索经验决定继续探索哪个版本 | 提示词、算子组合、控制流 |
 | [[G-Memory-2025-Hierarchical-Memory\|G-Memory]] | NeurIPS 2025 主会 | 多智能体记忆、图组织、轨迹与经验检索 | 将历史任务组织成分层记忆，为新任务提供相关案例和抽象经验 | 外部记忆内容、索引与检索 |
-| [[Agent Workflow Memory\|AWM]] | ICML 2025 主会 | 程序性记忆、网页智能体、在线/离线经验归纳 | 从历史轨迹提炼变量化的常用子流程，放入后续任务上下文 | 工作流记忆及其使用 |
+| [[AWM-2025-Workflow-Memory\|AWM]] | ICML 2025 主会 | 程序性记忆、网页智能体、在线/离线经验归纳 | 从历史轨迹提炼变量化的常用子流程，放入后续任务上下文 | 工作流记忆及其使用 |
 | [[GPTSwarm-2024-Optimizable-Agent-Graphs\|GPTSwarm]] | ICML 2024 主会 | 计算图、通信拓扑、策略梯度、节点示例优化 | 将 agent 拆成操作图，用任务奖励学习连边概率，并筛选节点示例 | 外部连边参数、节点提示词 |
 | [[MemEvolve-2026-Memory-System-Meta-Evolution\|MemEvolve]] | ICML 2026 主会 | 记忆系统元进化、代码搜索、经验图 | 内层积累经验，外层根据执行诊断生成并评测新的记忆模块代码 | 编码、存储、检索、维护机制 |
 | [[EvolveR-2026-Experience-Principles-Policy-RL\|EvolveR]] | ICML 2026 主会 | 经验原则、自蒸馏、主动检索、GRPO | 将成败轨迹总结为外部原则，再训练会检索和利用原则的策略 | 原则库与 LLM 参数 |
@@ -90,7 +90,7 @@ updated: 2026-10-20
 - **RL / 参数蒸馏**：GPTSwarm 用 REINFORCE 优化外部连边；EvolveR 用 GRPO 更新 LLM。EvolveR 默认只对生成动作计算策略损失，经验仍作为外部上下文；取消经验 mask 的消融不等于标准知识蒸馏。
 
 > [!tip] 阅读顺序
-> 先读 [[Agent Workflow Memory#3. 输入、输出与记忆结构]]，然后读 [[AFlow-2025-Workflow-Optimization#2. 输入、输出与两个执行层次]]，再读 [[G-Memory-2025-Hierarchical-Memory#3. 三层图到底存什么]]。
+> 先读 [[AWM-2025-Workflow-Memory#3. 输入、输出与记忆结构]]，然后读 [[AFlow-2025-Workflow-Optimization#2. 输入、输出与两个执行层次]]，再读 [[G-Memory-2025-Hierarchical-Memory#3. 三层图到底存什么]]。
 > 接着读 [[GPTSwarm-2024-Optimizable-Agent-Graphs#4. 方法一：任务成绩怎样改变连边？|GPTSwarm 的边优化]]，理解外部策略梯度。
 > 最后读 [[MemEvolve-2026-Memory-System-Meta-Evolution|MemEvolve]]，把内容积累与记忆机制优化分开。
 > 再读 [[EvolveR-2026-Experience-Principles-Policy-RL|EvolveR]]，连接外部记忆与参数 RL，并检查推理时关闭经验库的消融。

@@ -83,7 +83,7 @@ updated: 2026-10-21
 | 本题规划搜索 | [[RAP-2023-Reasoning-via-Planning\|RAP]] | 搜索树分数与访问记录 | 主方法不建立自动长期经验库 |
 | 工作流程序搜索 | [[AFlow-2025-Workflow-Optimization\|AFlow]] | 候选程序与验证表现 | 可复用的工作流 |
 | 外部连边策略 RL | [[GPTSwarm-2024-Optimizable-Agent-Graphs\|GPTSwarm]] | 连边分布的可训练参数 | 外部图分布及节点示例 |
-| 跨任务经验记忆 | [[VOYAGER-2024-Executable-Skill-Lifelong-Agent\|VOYAGER]]（可执行程序）、[[G-Memory-2025-Hierarchical-Memory\|G-Memory]]、[[Agent Workflow Memory\|AWM]] | 经验内容、组织或示范 | 后续任务可用记忆 |
+| 跨任务经验记忆 | [[VOYAGER-2024-Executable-Skill-Lifelong-Agent\|VOYAGER]]（可执行程序）、[[G-Memory-2025-Hierarchical-Memory\|G-Memory]]、[[AWM-2025-Workflow-Memory\|AWM]] | 经验内容、组织或示范 | 后续任务可用记忆 |
 | LLM 参数 RL / 蒸馏 | 后续队列继续补充 | 模型权重 | 参数化能力，需单独验证泛化 |
 
 RAP 中树节点表示任务状态，AFlow 的搜索节点表示工作流候选，GPTSwarm 操作节点执行 LLM/工具调用；这些图的层级与语义不同。

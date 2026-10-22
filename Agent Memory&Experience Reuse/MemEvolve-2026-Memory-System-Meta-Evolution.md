@@ -17,7 +17,7 @@ cssclasses:
 updated: 2026-10-18
 ---
 
-[[00-Agent-Memory-Experience-Reuse|← 论文索引]] · [[Agent Workflow Memory|对照 AWM]] · [[AFlow-2025-Workflow-Optimization|对照 AFlow]] · [[GPTSwarm-2024-Optimizable-Agent-Graphs|对照 GPTSwarm]]
+[[00-Agent-Memory-Experience-Reuse|← 论文索引]] · [[AWM-2025-Workflow-Memory|对照 AWM]] · [[AFlow-2025-Workflow-Optimization|对照 AFlow]] · [[GPTSwarm-2024-Optimizable-Agent-Graphs|对照 GPTSwarm]]
 
 # MemEvolve：让记忆内容与记忆系统代码共同进化
 

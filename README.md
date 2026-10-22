@@ -25,7 +25,7 @@ cssclasses:
 - [[00-Agent-Memory-Experience-Reuse|智能体记忆与经验复用 · 论文索引]]：论文分类、核心总结与比较。
 - [[AFlow-2025-Workflow-Optimization|AFlow]]：从验证反馈出发，修改代码形式的智能体工作流。
 - [[G-Memory-2025-Hierarchical-Memory|G-Memory]]：组织历史任务与抽象经验，为新任务提供记忆。
-- [[Agent Workflow Memory|AWM]]：ICML 2025，从历史轨迹提炼工作流记忆；含在线/离线机制、两类网页评测与代码核对。
+- [[AWM-2025-Workflow-Memory|AWM]]：ICML 2025，从历史轨迹提炼工作流记忆；含在线/离线机制、两类网页评测与代码核对。
 - [[GPTSwarm-2024-Optimizable-Agent-Graphs|GPTSwarm]]：ICML 2024，用任务奖励学习多智能体连边概率；区分外部策略 RL、节点示例和模型训练。
 - [[MemEvolve-2026-Memory-System-Meta-Evolution|MemEvolve]]：ICML 2026，执行轨迹驱动记忆模块代码进化；含经验图检索、跨任务评测与实现边界。
 - [[EvolveR-2026-Experience-Principles-Policy-RL|EvolveR]]：ICML 2026，从轨迹提炼可检索原则，再用 GRPO 更新 LLM；含观察 loss mask、评测与代码核对。
@@ -43,7 +43,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 - [论文索引](Agent%20Memory%26Experience%20Reuse/00-Agent-Memory-Experience-Reuse.md)
 - [AFlow 精读](Agent%20Memory%26Experience%20Reuse/AFlow-2025-Workflow-Optimization.md)
 - [G-Memory 精读](Agent%20Memory%26Experience%20Reuse/G-Memory-2025-Hierarchical-Memory.md)
-- [AWM 精读](Agent%20Memory%26Experience%20Reuse/Agent%20Workflow%20Memory.md)
+- [AWM 精读](Agent%20Memory%26Experience%20Reuse/AWM-2025-Workflow-Memory.md)
 - [GPTSwarm 精读](Agent%20Memory%26Experience%20Reuse/GPTSwarm-2024-Optimizable-Agent-Graphs.md)
 - [MemEvolve 精读](Agent%20Memory%26Experience%20Reuse/MemEvolve-2026-Memory-System-Meta-Evolution.md)
 - [EvolveR 精读](Agent%20Memory%26Experience%20Reuse/EvolveR-2026-Experience-Principles-Policy-RL.md)
