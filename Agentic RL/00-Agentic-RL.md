@@ -9,7 +9,7 @@ tags:
 cssclasses:
   - paper-note
   - paper-index
-updated: 2026-10-21
+updated: 2026-10-22
 ---
 
 # Agentic RL：论文地图与阅读队列
@@ -36,7 +36,7 @@ updated: 2026-10-21
 
 | 笔记 | 发表状态 | 主题与核心机制 | 核验状态 |
 | --- | --- | --- | --- |
-| [[CB-PbRL-2026-Constrained-Bilevel-Preference-RL\|CB-PbRL]] | NeurIPS 2026主会已录用，官方Poster条目 | 上层多维偏好与违规分类学习奖励/成本；下层熵正则RL对偶、最优λ响应与Clarke近似 | 已完成用户上传28页CB-RLHF稿正文与附录精读；含完整loss、KKT/超梯度、四环境表1与复现配置；录用终稿未逐页比对、源码未取得 |
+| [[CB-PbRL-2026-Constrained-Bilevel-Preference-RL\|CB-PbRL]] | NeurIPS 2026主会已录用，官方Poster条目 | 上层多维偏好与违规分类学习奖励/成本；下层熵正则RL对偶、最优λ响应与Clarke近似 | 已完成上传稿精读；2026-10-22按用户提供的教学重写版替换正文，检查Markdown、公式与流程图；录用终稿未逐页比对、源码未取得 |
 
 [在GitHub阅读CB-PbRL笔记](CB-PbRL-2026-Constrained-Bilevel-Preference-RL.md)
 
@@ -127,3 +127,5 @@ RAP 中树节点表示任务状态，AFlow 的搜索节点表示工作流候选�
 
 
 2026-10-21：完成VOYAGER arXiv v2正文与附录精读，渲染核对表1/2和图9，静态核对官方代码55e45a8；新增独立笔记，区分TMLR发表身份、实际阅读版本、外部技能更新与参数RL，保留预算/判定/环境辅助和实现差异。未运行游戏复现。队列3/19，下一篇Planner-R1；队列外CB-PbRL及记忆主题内容保留。
+
+2026-10-22：以用户提供的CB-PbRL教学重写版替换原笔记；保留其14节正文与讲解顺序，检查公式、表格、Mermaid与内部链接，更新过时的队列提示。文件名和索引入口保持稳定；固定队列仍为3/19，下一篇Planner-R1。
