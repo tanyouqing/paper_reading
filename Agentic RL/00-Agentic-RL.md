@@ -9,7 +9,7 @@ tags:
 cssclasses:
   - paper-note
   - paper-index
-updated: 2026-10-22
+updated: 2026-10-23
 ---
 
 # Agentic RL：论文地图与阅读队列
@@ -18,7 +18,7 @@ updated: 2026-10-22
 
 > [!abstract] 阅读目标
 > 理解语言模型智能体如何规划、调用工具、处理长程反馈，以及如何通过强化学习改善策略。先分清推理时搜索、外部记忆更新、外部策略训练与 LLM 参数训练，再比较论文。
-> 已完成 3/19 篇：RAP、LATS、VOYAGER。下一篇：Planner-R1。仅在完成实质精读后标记完成。
+> 已完成 4/19 篇：RAP、LATS、VOYAGER、Planner-R1。下一篇：ToolRL。仅在完成实质精读后标记完成。
 
 ## 已完成论文
 
@@ -27,12 +27,13 @@ updated: 2026-10-22
 | [[RAP-2023-Reasoning-via-Planning\|RAP]] | EMNLP 2023 主会 | 规划、世界模型、推理时搜索 | 冻结 LLM 提出动作并预测状态，MCTS 利用过程奖励选择分支 | 当前题搜索树的价值与访问记录；LLM 权重不变 |
 | [[LATS-2024-Language-Agent-Tree-Search\|LATS]] | ICML 2024 主会 | 规划、环境交互、搜索、反思 | 冻结 LLM 提出候选、评价观察、总结失败；MCTS 复用前缀 | 本题搜索统计与反思上下文；非 LLM 参数训练 |
 | [[VOYAGER-2024-Executable-Skill-Lifelong-Agent\|VOYAGER]] | TMLR 2024 期刊 | 开放探索、程序性记忆、可执行技能 | 自动课程、程序执行修订与成功技能检索组合 | 外部代码/描述索引与任务记录；无模型参数训练 |
+| [[Planner-R1-2025-Reward-Shaping-Agentic-RL\|Planner-R1]] | arXiv 2025 预印本 | LLM参数RL、规划、工具、奖励塑形 | 终局Schema门控、约束部分得分、GRPO | LLM策略权重；无长期技能库，配置/正文聚合差异保留 |
 
-[在 GitHub 阅读 RAP](RAP-2023-Reasoning-via-Planning.md) · [LATS 精读](LATS-2024-Language-Agent-Tree-Search.md) · [VOYAGER 精读](VOYAGER-2024-Executable-Skill-Lifelong-Agent.md)
+[在 GitHub 阅读 RAP](RAP-2023-Reasoning-via-Planning.md) · [LATS 精读](LATS-2024-Language-Agent-Tree-Search.md) · [VOYAGER 精读](VOYAGER-2024-Executable-Skill-Lifelong-Agent.md) · [Planner-R1 精读](Planner-R1-2025-Reward-Shaping-Agentic-RL.md)
 
 ## 队列外补充阅读
 
-本栏记录临时指定论文，不计入19篇队列，不改变定时任务或下一篇。固定队列现为3/19，下一篇Planner-R1。
+本栏记录临时指定论文，不计入19篇队列，不改变定时任务或下一篇。固定队列现为4/19，下一篇ToolRL。
 
 | 笔记 | 发表状态 | 主题与核心机制 | 核验状态 |
 | --- | --- | --- | --- |
@@ -46,7 +47,7 @@ updated: 2026-10-22
 - 上层F明确依赖最优λ和策略诱导轨迹分布，不能将普通交替拟合等同完整超梯度。
 - 原文表1的累计回报为真实奖励减真实成本；四环境体现风险/表现折中，Walker末期违规仍达87%，不能说保证实际零违规。
 - 版本分开：NeurIPS 2026录用条目称CB-PbRL；本次用户上传稿为ICLR匿名投稿版CB-RLHF。精读依据写明，不冒充终稿已比对。
-- 固定队列现为3/19、下一篇Planner-R1；队列外补充现有1篇已完成上传稿全文精读。
+- 固定队列现为4/19、下一篇ToolRL；队列外补充现有1篇已完成上传稿全文精读。
 
 ## 按图片顺序的 19 篇队列
 
@@ -57,8 +58,8 @@ updated: 2026-10-22
 | 1 | Planning | [[RAP-2023-Reasoning-via-Planning\|RAP]] | 完成精读 |
 | 2 | Planning | [[LATS-2024-Language-Agent-Tree-Search\|LATS]] | 完成精读 |
 | 3 | Planning | [[VOYAGER-2024-Executable-Skill-Lifelong-Agent\|VOYAGER]] | 完成精读 |
-| 4 | Planning | Planner-R1 | 待读，下一篇 |
-| 5 | Tool Use | ToolRL | 待读 |
+| 4 | Planning | [[Planner-R1-2025-Reward-Shaping-Agentic-RL\|Planner-R1]] | 完成精读 |
+| 5 | Tool Use | ToolRL | 待读，下一篇 |
 | 6 | Tool Use | ARTIST | 待读 |
 | 7 | Tool Use | ToRL | 待读 |
 | 8 | Tool Use | GiGPO | 待读 |
@@ -84,7 +85,7 @@ updated: 2026-10-22
 | 工作流程序搜索 | [[AFlow-2025-Workflow-Optimization\|AFlow]] | 候选程序与验证表现 | 可复用的工作流 |
 | 外部连边策略 RL | [[GPTSwarm-2024-Optimizable-Agent-Graphs\|GPTSwarm]] | 连边分布的可训练参数 | 外部图分布及节点示例 |
 | 跨任务经验记忆 | [[VOYAGER-2024-Executable-Skill-Lifelong-Agent\|VOYAGER]]（可执行程序）、[[G-Memory-2025-Hierarchical-Memory\|G-Memory]]、[[AWM-2025-Workflow-Memory\|AWM]] | 经验内容、组织或示范 | 后续任务可用记忆 |
-| LLM 参数 RL / 蒸馏 | 后续队列继续补充 | 模型权重 | 参数化能力，需单独验证泛化 |
+| LLM 参数 RL / 蒸馏 | [[Planner-R1-2025-Reward-Shaping-Agentic-RL\|Planner-R1]]（GRPO，无蒸馏） | 终局回报→组内优势→token概率更新 | 模型权重，需单独验证泛化 |
 
 RAP 中树节点表示任务状态，AFlow 的搜索节点表示工作流候选，GPTSwarm 操作节点执行 LLM/工具调用；这些图的层级与语义不同。
 
@@ -103,6 +104,14 @@ RAP 中树节点表示任务状态，AFlow 的搜索节点表示工作流候选�
 - **实现区别**：生成提示只放top-5技能，运行时载入整个库；成功入库没有自动验证新初态重放，不能把一次任务通过等同普遍鲁棒的技能。
 - **实验边界**：160轮程序生成预算、结构化状态与高层API、死亡保留物品；表1钻石级仅1/3成功。表2新世界四目标各3/3，支持有限的同域组合迁移，不能宣称任意领域泛化。
 - **版本边界**：正式身份为TMLR 2024；本次实读arXiv v2（42页）及官方代码55e45a8，期刊终稿受访问验证限制，未逐页比对。
+
+## VOYAGER → Planner-R1：从外部程序积累到LLM参数RL
+
+- **VOYAGER**：冻结LLM，执行反馈修改程序，成功代码进入跨任务技能库。
+- **Planner-R1**：本文准确定位为旅行规划奖励塑形论文（2509.25779），不是近名Embodied Planner-R1或Plan-R1；用GRPO训练Qwen3权重，不建立长期技能库。
+- **反馈粒度**：所谓密集奖励仍是计划结束后给约束部分分；整轨迹优势广播给生成token，没有逐调用的过程奖励模型。
+- **实现边界**：正文按轨迹长度平均，附录配置token-mean；专用训练源码/权重未定位到，不能冒充已核验作者loss和mask。基准评测代码已另行固定版本核对。
+- **实验边界**：180个不同训练查询不等于180条rollout；主训练16×H200，3.5倍效率只统计更新FLOPs、不含rollout。8B 3000步有两项域外退化，不能说完全没有遗忘。
 
 ## 阅读与维护规范
 
@@ -129,3 +138,5 @@ RAP 中树节点表示任务状态，AFlow 的搜索节点表示工作流候选�
 2026-10-21：完成VOYAGER arXiv v2正文与附录精读，渲染核对表1/2和图9，静态核对官方代码55e45a8；新增独立笔记，区分TMLR发表身份、实际阅读版本、外部技能更新与参数RL，保留预算/判定/环境辅助和实现差异。未运行游戏复现。队列3/19，下一篇Planner-R1；队列外CB-PbRL及记忆主题内容保留。
 
 2026-10-22：以用户提供的CB-PbRL教学重写版替换原笔记；保留其14节正文与讲解顺序，检查公式、表格、Mermaid与内部链接，更新过时的队列提示。文件名和索引入口保持稳定；固定队列仍为3/19，下一篇Planner-R1。
+
+2026-10-23：完成Planner-R1（Reward Shaping，2509.25779v2）正文、附录A/B与C关键案例精读；核对奖励、GRPO公式、公开配置、表1/2与FLOPs范围，静态检查TravelPlanner评测e52c87f。未定位到专用训练代码/模型，未运行复现；仅标预印本。队列4/19，下一篇ToolRL；CB-PbRL重写与七篇记忆主题内容保留。
