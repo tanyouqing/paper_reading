@@ -8,14 +8,14 @@ tags:
 cssclasses:
   - paper-note
   - paper-index
-updated: 2026-10-22
+updated: 2026-10-24
 ---
 
 # Agent Memory & Experience Reuse
 
 > [!abstract] 这组笔记研究什么？
 > 如何让智能体从执行与评测中积累经验，并把经验转化为**更好的执行流程**或**下一次任务可用的记忆**。
-> 当前收录 7 篇完整精读：AFlow、AWM、G-Memory、GPTSwarm、MemEvolve、EvolveR、EvoCF。AFlow/AWM/G-Memory/GPTSwarm/MemEvolve/EvoCF 改善模型外部系统；EvolveR 将外部原则记忆与 GRPO 参数训练结合。注意：GPTSwarm 的 RL 训练连边参数，EvolveR 的 RL 训练 LLM 策略参数。
+> 当前收录 8 篇完整精读：AFlow、AWM、G-Memory、GPTSwarm、MemEvolve、EvolveR、EvoCF、NSI。AFlow/AWM/G-Memory/GPTSwarm/MemEvolve/EvoCF/NSI 改善模型外部系统；EvolveR 将外部原则记忆与 GRPO 参数训练结合。注意：GPTSwarm 的 RL 训练连边参数，EvolveR 的 RL 训练 LLM 策略参数。
 
 ## 论文索引
 
@@ -28,6 +28,7 @@ updated: 2026-10-22
 | [[MemEvolve-2026-Memory-System-Meta-Evolution\|MemEvolve]] | ICML 2026 主会 | 记忆系统元进化、代码搜索、经验图 | 内层积累经验，外层根据执行诊断生成并评测新的记忆模块代码 | 编码、存储、检索、维护机制 |
 | [[EvolveR-2026-Experience-Principles-Policy-RL\|EvolveR]] | ICML 2026 主会 | 经验原则、自蒸馏、主动检索、GRPO | 将成败轨迹总结为外部原则，再训练会检索和利用原则的策略 | 原则库与 LLM 参数 |
 | [[EvoCF-2026-Memory-Guided-Counterfactual-Planning\|EvoCF]] | ICML 2026 主会 | 失败规则、联合动作编辑、经验引导规划 | 同一批规则同时指导替代动作生成和排序，选择当前一步联合动作 | 外部规则库、行动候选与选择 |
+| [[NSI-2026-Logic-Grounded-Skill-Induction\|NSI]] | ICML 2026 主会 | 可执行技能、符号状态、程序归纳、局部修复 | 从示范归纳条件/循环技能图，由解释器执行，再将恢复轨迹嫁接进图 | 技能程序、变量绑定、调用条件 |
 
 ## 延伸资料
 
@@ -37,7 +38,7 @@ updated: 2026-10-22
 
 [[README|← 仓库主页]]
 
-## 先建立七个闭环
+## 先建立八个闭环
 
 **AFlow：改进“以后如何做这一类题”。** 一个候选工作流在很多验证题上执行，评测结果指导下一次工作流修改。最后产物是可复用的执行程序。
 
@@ -52,6 +53,8 @@ updated: 2026-10-22
 **EvolveR：改进“模型如何利用积累的经验做题”。** 离线将轨迹提炼为原则，在线主动检索原则与事实，随后用 GRPO 更新 LLM。经验文本默认屏蔽策略损失，不能把它理解成直接背下原则。
 
 **EvoCF：改进“当前这一步团队还可以怎么行动”。** 将失败转成规则，结合检索结果生成和排序替代联合动作。它不训练模型参数，也不学习通信拓扑；规则主要供模型推理，不是形式化验证器。
+
+**NSI：改进“可复用技能内部如何按状态执行”。** 从成功示范生成带条件、循环和动态绑定的技能图，由解释器实际运行；失败恢复成功后嫁接新分支。技能选择仍使用提示，技能内部控制不只是文字建议。
 
 | 比较轴 | AFlow | G-Memory | AWM |
 | --- | --- | --- | --- |
@@ -92,9 +95,16 @@ updated: 2026-10-22
 - **符号与反事实边界**：模型依据逻辑式规则推理排序，不模拟全部候选，不构成因果贡献估计或形式验证。
 - **实验与成本**：正式版只报告 MAP-THOR；SR 0.72→0.84，而整次耗时 166.43→269.76 秒，步数下降不等于延迟降低。本次未定位到官方 EvoCF 实现，记忆隔离协议与部分数值口径仍不充分。
 
+## NSI 补上的比较维度
+
+- **经验到执行**：AWM主方法提供文字工作流；NSI将经验变成由解释器执行的技能程序。LLM仍负责状态抽取、路由和程序合成。
+- **图的语义**：节点是变量操作、条件、循环、环境动作和终点，边是真正的控制流；不是多agent通信图或仅供检索的记忆图。
+- **验证边界**：历史动作一致性和数据流检查不等于未知环境下正确性保证。公开ALFWorld候选按回放通过比例不下降接受，比论文严格覆盖扩张条件宽松。
+- **结果与复现**：完整NSI在三个基准表现最好，但离线TextCraft78.5低于AWM92.5，在线修复后95.2；当前公开入口覆盖ALFWorld/TextCraft，未覆盖WebShop。完整成本未报告。
+
 ## 与研究设想的对应
 
-- **经验优化 Harness**：AFlow、GPTSwarm 与 MemEvolve 直接相关；G-Memory 提供可迁移的经验整理机制。
+- **经验优化 Harness**：NSI直接归纳并修改技能程序；AFlow、GPTSwarm 与 MemEvolve 直接相关；G-Memory 提供可迁移的经验整理机制。
 - **长期记忆与检索**：EvolveR 直接相关；G-Memory 与 AWM 直接相关：前者组织多粒度经验，后者提炼程序性子流程；AFlow 的经验主要服务搜索器。
 - **多智能体协作**：EvoCF 直接修订联合动作与分工，但没有通信拓扑学习；GPTSwarm 直接学习信息连接；AFlow 可以改变调用与控制流程；G-Memory 可以给团队成员提供历史指导，但公开实现中角色投影是可选项。
 - **RL / 参数蒸馏**：GPTSwarm 用 REINFORCE 优化外部连边；EvolveR 用 GRPO 更新 LLM。EvolveR 默认只对生成动作计算策略损失，经验仍作为外部上下文；取消经验 mask 的消融不等于标准知识蒸馏。
@@ -105,6 +115,7 @@ updated: 2026-10-22
 > 最后读 [[MemEvolve-2026-Memory-System-Meta-Evolution|MemEvolve]]，把内容积累与记忆机制优化分开。
 > 再读 [[EvolveR-2026-Experience-Principles-Policy-RL|EvolveR]]，连接外部记忆与参数 RL，并检查推理时关闭经验库的消融。
 > 接着读 [[EvoCF-2026-Memory-Guided-Counterfactual-Planning|EvoCF]]，重点看附录提示词与联合动作粒度，以及成本和验证边界。
+> 再读 [[NSI-2026-Logic-Grounded-Skill-Induction|NSI]]，对照文字经验与解释器执行技能，重点看历史一致性与在线图修复。
 > 对代码感兴趣，优先看各篇的“实现边界 / 代码核对”部分；对实验感兴趣，先看 benchmark 表，明确分数到底测什么。
 
 ## 共同的阅读检查表
@@ -121,4 +132,4 @@ updated: 2026-10-22
 > [!info] 证据标签
 > **论文**：原文明示的方法或实验；**代码核对**：公开实现中的具体行为；**解释例子**：为教学构造的例子；**研究逻辑重建**：依据问题与方法组织的设计理由，不代表作者未公开的真实心理过程。
 
-每篇末尾保留原始来源。代码链接指向公开仓库，行为可能随版本改变；最近更新日期为 2026-10-22。所有双向链接、Callout、Mermaid、公式与 YAML 属性均采用 Obsidian 原生支持的写法，不依赖 Dataview 等插件。
+每篇末尾保留原始来源。代码链接指向公开仓库，行为可能随版本改变；最近更新日期为 2026-10-24。所有双向链接、Callout、Mermaid、公式与 YAML 属性均采用 Obsidian 原生支持的写法，不依赖 Dataview 等插件。

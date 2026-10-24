@@ -32,6 +32,7 @@ cssclasses:
 - [[MemEvolve-2026-Memory-System-Meta-Evolution|MemEvolve]]：ICML 2026，执行轨迹驱动记忆模块代码进化；含经验图检索、跨任务评测与实现边界。
 - [[EvolveR-2026-Experience-Principles-Policy-RL|EvolveR]]：ICML 2026，从轨迹提炼可检索原则，再用 GRPO 更新 LLM；含观察 loss mask、评测与代码核对。
 - [[EvoCF-2026-Memory-Guided-Counterfactual-Planning|EvoCF]]：ICML 2026，失败规则指导当前联合动作的生成与选择；含规划粒度、评测与成本边界。
+- [[NSI-2026-Logic-Grounded-Skill-Induction|NSI]]：ICML 2026，从轨迹生成解释器执行的条件技能图；含历史一致性、局部修复及论文/代码边界。
 - [[XHS Notes/知识/Agent Memory 些许感悟|Agent Memory 些许感悟]]：已有导入随笔与配图。
 
 ## GitHub 浏览入口
@@ -52,6 +53,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 - [MemEvolve 精读](Agent%20Memory%26Experience%20Reuse/MemEvolve-2026-Memory-System-Meta-Evolution.md)
 - [EvolveR 精读](Agent%20Memory%26Experience%20Reuse/EvolveR-2026-Experience-Principles-Policy-RL.md)
 - [EvoCF 精读](Agent%20Memory%26Experience%20Reuse/EvoCF-2026-Memory-Guided-Counterfactual-Planning.md)
+- [NSI 精读](Agent%20Memory%26Experience%20Reuse/NSI-2026-Logic-Grounded-Skill-Induction.md)
 - [Agent Memory 导入随笔](XHS%20Notes/知识/Agent%20Memory%20些许感悟.md)
 
 ## 笔记组织与增量维护
@@ -60,7 +62,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 每篇精读重点说明出发点、创新、架构、方法、输入输出、benchmark、评测与局限。论文事实、代码行为、教学例子和研究逻辑重建分开标识；不把推测写成作者结论。
 
-新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的七篇论文及 Agentic RL 主题的 RAP、LATS、VOYAGER、Planner-R1 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。固定队列进度为4/19，下一篇ToolRL。
+新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的八篇论文及 Agentic RL 主题的 RAP、LATS、VOYAGER、Planner-R1 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。固定队列进度为4/19，下一篇ToolRL。
 
 ## 内容维护规范
 
