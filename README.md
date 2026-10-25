@@ -22,6 +22,8 @@ cssclasses:
 
 - [[Planner-R1-2025-Reward-Shaping-Agentic-RL|Planner-R1]]：arXiv 2025，约束部分得分与GRPO训练旅行规划；含token/轨迹聚合差异与成本边界。
 
+- [[ToolRL-2025-Structured-Tool-Reward-GRPO|ToolRL]]：NeurIPS 2025主会，工具调用结构奖励与GRPO；含单步训练、实际loss与默认KL/熵、评测边界。
+
 - [[CB-PbRL-2026-Constrained-Bilevel-Preference-RL|CB-PbRL]]：队列外精读；基于上传的CB-RLHF全文，整理多维偏好、约束双层优化、MuJoCo实验与理论边界；另注明NeurIPS录用版本。
 
 - [[00-Agent-Memory-Experience-Reuse|智能体记忆与经验复用 · 论文索引]]：论文分类、核心总结与比较。
@@ -44,6 +46,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 - [LATS 精读](Agentic%20RL/LATS-2024-Language-Agent-Tree-Search.md)
 - [VOYAGER 精读](Agentic%20RL/VOYAGER-2024-Executable-Skill-Lifelong-Agent.md)
 - [Planner-R1 精读](Agentic%20RL/Planner-R1-2025-Reward-Shaping-Agentic-RL.md)
+- [ToolRL 精读](Agentic%20RL/ToolRL-2025-Structured-Tool-Reward-GRPO.md)
 - [CB-PbRL 补充笔记](Agentic%20RL/CB-PbRL-2026-Constrained-Bilevel-Preference-RL.md)
 - [论文索引](Agent%20Memory%26Experience%20Reuse/00-Agent-Memory-Experience-Reuse.md)
 - [AFlow 精读](Agent%20Memory%26Experience%20Reuse/AFlow-2025-Workflow-Optimization.md)
@@ -62,7 +65,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 每篇精读重点说明出发点、创新、架构、方法、输入输出、benchmark、评测与局限。论文事实、代码行为、教学例子和研究逻辑重建分开标识；不把推测写成作者结论。
 
-新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的八篇论文及 Agentic RL 主题的 RAP、LATS、VOYAGER、Planner-R1 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。固定队列进度为4/19，下一篇ToolRL。
+新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的八篇论文及 Agentic RL 主题的 RAP、LATS、VOYAGER、Planner-R1、ToolRL 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。固定队列进度为5/19，下一篇ARTIST。
 
 ## 内容维护规范
 
@@ -85,5 +88,6 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 在本地仓库执行 `git pull --ff-only` 获取远程更新；编辑后提交并推送自己的修改。若本地有未提交变更或双方修改冲突，先处理本地改动，再同步，不强制覆盖。
 
 已移除初始欢迎页和 AWM 的本地 PDF，使用官方论文链接；已有随笔、图片和插件保留。此仓库当前为公开仓库。
+
 
 
