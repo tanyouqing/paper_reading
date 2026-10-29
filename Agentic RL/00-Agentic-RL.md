@@ -9,7 +9,7 @@ tags:
 cssclasses:
   - paper-note
   - paper-index
-updated: 2026-10-25
+updated: 2026-10-29
 ---
 
 # Agentic RL：论文地图与阅读队列
@@ -18,7 +18,29 @@ updated: 2026-10-25
 
 > [!abstract] 阅读目标
 > 理解语言模型智能体如何规划、调用工具、处理长程反馈，以及如何通过强化学习改善策略。先分清推理时搜索、外部记忆更新、外部策略训练与 LLM 参数训练，再比较论文。
-> 已完成 5/19 篇：RAP、LATS、VOYAGER、Planner-R1、ToolRL。下一篇：ARTIST。仅在完成实质精读后标记完成。
+> 已完成 5/19 篇：RAP、LATS、VOYAGER、Planner-R1、ToolRL。原队列恢复位置：ARTIST。临时优先队列：AgeMem（完成）→Memory-R1→MemSkill→MemRL→LightMem；下一篇Memory-R1。仅在完成实质精读并同步后标记完成。
+
+## 临时优先队列（2026-10-26插队）
+
+用户要求先逐篇完成本组，再恢复原19篇；每次一篇。原队列仍5/19，恢复位置ARTIST。优先队列完成1/5：AgeMem已精读并整理入库。下一篇Memory-R1；完成后同步标记原队列第10项。
+
+| 顺序 | 论文/定位编号 | 状态 |
+| --- | --- | --- |
+| 1 | [[AgeMem-2026-Unified-LTM-STM-Policy-RL\|AgeMem]]，2601.01885 | 完成精读；ACL 2026主会长论文 |
+| 2 | Memory-R1，2508.19828 | 优先队列下一篇；完成后同步标记原队列第10项 |
+| 3 | MemSkill，2602.02474 | 待读，题名/身份待核验 |
+| 4 | MemRL，2601.03192 | 待读，题名/身份待核验 |
+| 5 | LightMem，2510.18866 | 待读，题名/身份待核验 |
+
+[AgeMem完整笔记](AgeMem-2026-Unified-LTM-STM-Policy-RL.md)。四篇新增项不计入原19篇分母；Memory-R1提前读完后不重复推荐。论文内容已完成与远程同步状态分开记录，不以本地完成冒充推送成功。
+
+### AgeMem补充的理解
+
+- **出发点**：先看信息、重置短期窗口、经历干扰、再揭示任务，使早期存储与后期使用接受同一目标监督。
+- **多轮粒度**：与ToolRL单步历史条件化不同，AgeMem训练中真实执行记忆/上下文工具，下一轮输入随之改变。
+- **信用分配**：完整轨迹末端优势广播，不是每步独立奖励或因果贡献；默认grpo分组与multi_step_grpo实现不同，详见笔记。
+- **记忆与迁移**：公开默认库每rollout清空，跨阶段保留不等于跨无限任务积累；策略参数迁移与具体事实迁移要区分。
+- **成本**：平均prompt缩短3.1%/5.1%不等于总token费用下降，工具调用和外部Qwen-Max成本另计。
 
 ## 已完成论文
 
@@ -34,7 +56,7 @@ updated: 2026-10-25
 
 ## 队列外补充阅读
 
-本栏记录临时指定论文，不计入19篇队列，不改变定时任务或下一篇。固定队列现为5/19，下一篇ARTIST。
+本栏记录临时指定论文，不计入19篇队列，不改变定时任务或下一篇。固定队列现为5/19，优先队列先行；原队列恢复位置ARTIST。
 
 | 笔记 | 发表状态 | 主题与核心机制 | 核验状态 |
 | --- | --- | --- | --- |
@@ -48,7 +70,7 @@ updated: 2026-10-25
 - 上层F明确依赖最优λ和策略诱导轨迹分布，不能将普通交替拟合等同完整超梯度。
 - 原文表1的累计回报为真实奖励减真实成本；四环境体现风险/表现折中，Walker末期违规仍达87%，不能说保证实际零违规。
 - 版本分开：NeurIPS 2026录用条目称CB-PbRL；本次用户上传稿为ICLR匿名投稿版CB-RLHF。精读依据写明，不冒充终稿已比对。
-- 固定队列现为5/19、下一篇ARTIST；队列外补充现有1篇已完成上传稿全文精读。
+- 固定队列现为5/19、恢复位置ARTIST；队列外补充现有1篇已完成上传稿全文精读。
 
 ## 按图片顺序的 19 篇队列
 
@@ -61,11 +83,11 @@ updated: 2026-10-25
 | 3 | Planning | [[VOYAGER-2024-Executable-Skill-Lifelong-Agent\|VOYAGER]] | 完成精读 |
 | 4 | Planning | [[Planner-R1-2025-Reward-Shaping-Agentic-RL\|Planner-R1]] | 完成精读 |
 | 5 | Tool Use | [[ToolRL-2025-Structured-Tool-Reward-GRPO\|ToolRL]] | 完成精读 |
-| 6 | Tool Use | ARTIST | 待读，下一篇 |
+| 6 | Tool Use | ARTIST | 待读，优先队列结束后恢复 |
 | 7 | Tool Use | ToRL | 待读 |
 | 8 | Tool Use | GiGPO | 待读 |
 | 9 | Tool Use | ARPO | 待读 |
-| 10 | Memory | Memory-R1 | 待读 |
+| 10 | Memory | Memory-R1 | 待读，临时优先队列第2项；提前完成后跳过 |
 | 11 | Memory | MemAgent | 待读 |
 | 12 | Memory | ReSum（图中标注 Context Folding） | 待读 |
 | 13 | Self-Improvement | Reflexion | 待读 |
@@ -152,3 +174,8 @@ RAP 中树节点表示任务状态，AFlow 的搜索节点表示工作流候选�
 
 
 2026-10-25：完成ToolRL NeurIPS 2025主会正式31页稿及关键附录，核对官方代码8cee13e的数据、奖励、组优势、token loss、默认KL/熵与三套评测；运行纯Python奖励样例，未训练GPU或复现成绩。保留贪心/最优匹配、论文/代码公式、Equal Max数字和项目页冲突。队列5/19，下一篇ARTIST；队列外CB-PbRL和八篇记忆主题内容保留。
+
+2026-10-27：完成AgeMem正式ACL 2026主会27页稿、附录A–D与作者代码98f563f精读；新增完整笔记及临时优先队列，核对实际多轮执行、优势广播、默认grpo/step-wise分组差异、奖励/KL配置与成本边界。只运行本地纯Python代理检查，未训练复现。GitHub连接工具未提供，命令行推送预检缺少认证，远程main未更新；保留本地提交/补丁与可恢复笔记，优先恢复同步，不将新增论文计入原19篇。
+
+
+2026-10-29：恢复GitHub连接，补交AgeMem完整笔记、优先队列和主页导航；优先队列1/5，下一篇Memory-R1。原19篇5/19、恢复位置ARTIST不变。
