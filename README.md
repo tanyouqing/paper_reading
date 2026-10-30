@@ -40,6 +40,8 @@ cssclasses:
 - [[EvoCF-2026-Memory-Guided-Counterfactual-Planning|EvoCF]]：ICML 2026，失败规则指导当前联合动作的生成与选择；含规划粒度、评测与成本边界。
 - [[NSI-2026-Logic-Grounded-Skill-Induction|NSI]]：ICML 2026，从轨迹生成解释器执行的条件技能图；含历史一致性、局部修复及论文/代码边界。
 - [[ADAS-2025-Automated-Agentic-System-Design|ADAS / Meta Agent Search]]：ICLR 2025，在代码空间自动设计任务处理系统；含研究出发点、真实五调用程序、设计档案与评测边界。
+- [[MaAS-2025-Cost-Aware-Agentic-Supernet|MaAS]]：ICML 2025，题目条件化的成本敏感流程选择；外部控制器训练与代码审计。
+- [[BudgetWeb-2026-Online-Memory-Token-Audit|BudgetWeb]]：EMNLP 2026主会，在线记忆/技能的完整token成本与普通actor预算对照；含技能验证边界。
 - [[XHS Notes/知识/Agent Memory 些许感悟|Agent Memory 些许感悟]]：已有导入随笔与配图。
 
 ## GitHub 浏览入口
@@ -65,6 +67,8 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 - [EvoCF 精读](Agent%20Memory%26Experience%20Reuse/EvoCF-2026-Memory-Guided-Counterfactual-Planning.md)
 - [NSI 精读](Agent%20Memory%26Experience%20Reuse/NSI-2026-Logic-Grounded-Skill-Induction.md)
 - [ADAS 精读](Agent%20Memory%26Experience%20Reuse/ADAS-2025-Automated-Agentic-System-Design.md)
+- [MaAS 精读](Agent%20Memory%26Experience%20Reuse/MaAS-2025-Cost-Aware-Agentic-Supernet.md)
+- [BudgetWeb 精读](Agent%20Memory%26Experience%20Reuse/BudgetWeb-2026-Online-Memory-Token-Audit.md)
 - [Agent Memory 导入随笔](XHS%20Notes/知识/Agent%20Memory%20些许感悟.md)
 
 ## 笔记组织与增量维护
@@ -73,7 +77,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 每篇精读重点说明出发点、创新、架构、方法、输入输出、benchmark、评测与局限。论文事实、代码行为、教学例子和研究逻辑重建分开标识；不把推测写成作者结论。
 
-新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的九篇论文及 Agentic RL 主题的 RAP、LATS、VOYAGER、Planner-R1、ToolRL、Memory-R1 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。原19篇队列进度为6/19，恢复位置ARTIST；临时优先队列AgeMem→Memory-R1→MemSkill→MemRL→LightMem先行。AgeMem、Memory-R1已完成精读并入库，优先队列2/5；下一篇MemSkill。Memory-R1同步计入原队列第10项，恢复时跳过。
+新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的十一篇论文（含BudgetWeb评测研究）及 Agentic RL 主题的 RAP、LATS、VOYAGER、Planner-R1、ToolRL、Memory-R1 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。原19篇队列进度为6/19，恢复位置ARTIST；临时优先队列AgeMem→Memory-R1→MemSkill→MemRL→LightMem先行。AgeMem、Memory-R1已完成精读并入库，优先队列2/5；下一篇MemSkill。Memory-R1同步计入原队列第10项，恢复时跳过。
 
 ## 内容维护规范
 

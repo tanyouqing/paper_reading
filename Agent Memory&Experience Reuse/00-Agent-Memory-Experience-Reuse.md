@@ -8,14 +8,14 @@ tags:
 cssclasses:
   - paper-note
   - paper-index
-updated: 2026-10-26
+updated: 2026-10-30
 ---
 
 # Agent Memory & Experience Reuse
 
 > [!abstract] 这组笔记研究什么？
 > 如何让智能体从执行与评测中积累经验，并把经验转化为**更好的执行流程**或**下一次任务可用的记忆**。
-> 当前收录 9 篇完整精读：AFlow、AWM、G-Memory、GPTSwarm、MemEvolve、EvolveR、EvoCF、NSI、ADAS。AFlow/AWM/G-Memory/GPTSwarm/MemEvolve/EvoCF/NSI/ADAS 改善模型外部系统；EvolveR 将外部原则记忆与 GRPO 参数训练结合。注意：GPTSwarm 的 RL 训练连边参数，EvolveR 的 RL 训练 LLM 策略参数。
+> 当前收录 11 篇完整精读：AFlow、AWM、G-Memory、GPTSwarm、MemEvolve、EvolveR、EvoCF、NSI、ADAS、MaAS、BudgetWeb（评测研究，笔记简称）。AFlow/AWM/G-Memory/GPTSwarm/MemEvolve/EvoCF/NSI/ADAS 改善模型外部系统；EvolveR 将外部原则记忆与 GRPO 参数训练结合。注意：GPTSwarm 的 RL 训练连边参数，EvolveR 的 RL 训练 LLM 策略参数。
 
 ## 论文索引
 
@@ -30,6 +30,8 @@ updated: 2026-10-26
 | [[EvoCF-2026-Memory-Guided-Counterfactual-Planning\|EvoCF]] | ICML 2026 主会 | 失败规则、联合动作编辑、经验引导规划 | 同一批规则同时指导替代动作生成和排序，选择当前一步联合动作 | 外部规则库、行动候选与选择 |
 | [[NSI-2026-Logic-Grounded-Skill-Induction\|NSI]] | ICML 2026 主会 | 可执行技能、符号状态、程序归纳、局部修复 | 从示范归纳条件/循环技能图，由解释器执行，再将恢复轨迹嫁接进图 | 技能程序、变量绑定、调用条件 |
 | [[ADAS-2025-Automated-Agentic-System-Design\|ADAS / Meta Agent Search]] | ICLR 2025 主会 | 系统设计自动化、代码搜索、设计档案 | 读取已有系统代码与验证分数，生成新的任务处理程序；含设计逻辑、真实五调用例子与评测审计 | 外部程序、提示词、模块信息流 |
+| [[MaAS-2025-Cost-Aware-Agentic-Supernet\|MaAS]] | ICML 2025 主会 | 按题路由、成本约束、超网、外部控制器训练 | 根据题目选择算子组合和深度，用答题反馈与成本训练控制器；含目标/代码差异和迁移边界 | 路由参数、算子程序与提示词 |
+| [[BudgetWeb-2026-Online-Memory-Token-Audit\|BudgetWeb]] | EMNLP 2026 主会 | 在线记忆/技能评测、完整成本、稳定性 | 把增强模块的token用于普通actor多交互，检验在线复用的净收益；含验证与补救混淆、代码边界 | 评测协议与成本对照 |
 
 ## 延伸资料
 
@@ -39,7 +41,7 @@ updated: 2026-10-26
 
 [[README|← 仓库主页]]
 
-## 先建立九个闭环
+## 十个学习闭环与一个评测视角
 
 **AFlow：改进“以后如何做这一类题”。** 一个候选工作流在很多验证题上执行，评测结果指导下一次工作流修改。最后产物是可复用的执行程序。
 
@@ -58,6 +60,10 @@ updated: 2026-10-26
 **NSI：改进“可复用技能内部如何按状态执行”。** 从成功示范生成带条件、循环和动态绑定的技能图，由解释器实际运行；失败恢复成功后嫁接新分支。技能选择仍使用提示，技能内部控制不只是文字建议。
 
 **ADAS：改进“由谁来设计解题系统”。** 将整个任务处理程序作为搜索对象，用模型生成代码、实际评分及完整设计档案迭代。档案主要服务外层设计者，不是内层任务检索经验库；没有模型参数训练。
+
+**MaAS：改进“这道题值得用哪些操作”。** 学习题目条件化的外部控制器，用正确率和API成本选择算子与深度；没有技能迁移可靠性保证。
+
+**BudgetWeb：检验“这些学习闭环是否值得”。** 在线增强的全部模块与上下文token都应计入成本，并与普通actor增加操作机会比较；这是评测研究，没有新记忆架构。
 
 | 比较轴 | AFlow | G-Memory | AWM |
 | --- | --- | --- | --- |
@@ -112,9 +118,25 @@ updated: 2026-10-26
 - **与 AFlow**：两者都搜索外部程序；AFlow进一步组织修改树、父版本选择和局部修改经验。ADAS不是基础模型RL或高阶递归优化器的实证。
 - **证据边界**：MGSM公开默认按语言条目切分，本次审计发现同一底题译本跨验证/测试；ARC跨模型迁移使用测试成绩选择top3。预算未完全对齐，搜索档案并非每代变好。
 
+## MaAS 补上的比较维度
+
+- **从静态到按题选择**：与ADAS/AFlow相比，学习可复用的流程选择器，新题不必重跑完整外层搜索；与GPTSwarm的总体连边学习也需区分。
+- **成本目标**：显式惩罚执行成本，Early-exit减少深度；这不是每题硬预算，也没有校准技能迁移成功率。
+- **训练对象**：小型外部控制器进行策略梯度风格训练；算子文字更新是生成修改，不是基础LLM的GRPO或参数蒸馏。
+- **实验与实现边界**：MATH相对AFlow提高0.54个百分点，历史测试API费用为0.42对1.66美元；token比值与费用比值不同。公开GSM8K梯度、文字更新接口、并发费用归因存在需修复或核验的问题；只覆盖三套基准入口。
+
+
+## BudgetWeb 补上的比较维度
+
+- **研究出发点**：同样的actor步数不等于同样的总计算；新增模块必须对比把这些token用来直接操作的机会成本。
+- **双重开销**：归纳/验证调用与每步注入上下文都花token，后者已在actor账本内；不是简单再加一次以免重复计数。
+- **验证对象**：技能调用失败后actor补救成功，不能直接当作技能迁移可靠；公开代码有有效动作检查，论文失败统计仍需版本和日志对齐。
+- **结论边界**：十步对十五步是近似预算，不是逐题硬约束；在线网页结果不能直接否定离线库、长部署摊销或记忆依赖任务。三次重复旧任务也不是新变体泛化保证。
+- **与MaAS**：MaAS学习成本路由；BudgetWeb检验是否需要增强模块。两者都没有完成迁移技能的独立可靠性验证。
+
 ## 与研究设想的对应
 
-- **经验优化 Harness**：ADAS直接搜索任务处理程序；NSI直接归纳并修改技能程序；AFlow、GPTSwarm 与 MemEvolve 直接相关；G-Memory 提供可迁移的经验整理机制。
+- **经验优化 Harness**：MaAS优化按题计算分配；BudgetWeb提供在线增强的成本对照原则；ADAS直接搜索任务处理程序；NSI直接归纳并修改技能程序；AFlow、GPTSwarm 与 MemEvolve 直接相关；G-Memory 提供可迁移的经验整理机制。
 - **长期记忆与检索**：EvolveR 直接相关；G-Memory 与 AWM 直接相关：前者组织多粒度经验，后者提炼程序性子流程；AFlow 的经验主要服务搜索器。
 - **多智能体协作**：EvoCF 直接修订联合动作与分工，但没有通信拓扑学习；GPTSwarm 直接学习信息连接；AFlow 可以改变调用与控制流程；G-Memory 可以给团队成员提供历史指导，但公开实现中角色投影是可选项。
 - **RL / 参数蒸馏**：GPTSwarm 用 REINFORCE 优化外部连边；EvolveR 用 GRPO 更新 LLM。EvolveR 默认只对生成动作计算策略损失，经验仍作为外部上下文；取消经验 mask 的消融不等于标准知识蒸馏。
@@ -127,6 +149,7 @@ updated: 2026-10-26
 > 接着读 [[EvoCF-2026-Memory-Guided-Counterfactual-Planning|EvoCF]]，重点看附录提示词与联合动作粒度，以及成本和验证边界。
 > 再读 [[NSI-2026-Logic-Grounded-Skill-Induction|NSI]]，对照文字经验与解释器执行技能，重点看历史一致性与在线图修复。
 > 补读 [[ADAS-2025-Automated-Agentic-System-Design|ADAS]]，先理解从人工设计到系统搜索的出发点，再看真实五调用程序与评测协议；与AFlow对照而非当成新型任务记忆。
+> 补读 [[MaAS-2025-Cost-Aware-Agentic-Supernet|MaAS]] 的按题计算分配，再读 [[BudgetWeb-2026-Online-Memory-Token-Audit|BudgetWeb]]，检查增加模块是否优于把预算用来多操作，以及技能验证和actor补救是否混淆。
 > 对代码感兴趣，优先看各篇的“实现边界 / 代码核对”部分；对实验感兴趣，先看 benchmark 表，明确分数到底测什么。
 
 ## 共同的阅读检查表
@@ -143,4 +166,4 @@ updated: 2026-10-26
 > [!info] 证据标签
 > **论文**：原文明示的方法或实验；**代码核对**：公开实现中的具体行为；**解释例子**：为教学构造的例子；**研究逻辑重建**：依据问题与方法组织的设计理由，不代表作者未公开的真实心理过程。
 
-每篇末尾保留原始来源。代码链接指向公开仓库，行为可能随版本改变；最近更新日期为 2026-10-26。所有双向链接、Callout、Mermaid、公式与 YAML 属性均采用 Obsidian 原生支持的写法，不依赖 Dataview 等插件。
+每篇末尾保留原始来源。代码链接指向公开仓库，行为可能随版本改变；最近更新日期为 2026-10-30。所有双向链接、Callout、Mermaid、公式与 YAML 属性均采用 Obsidian 原生支持的写法，不依赖 Dataview 等插件。
