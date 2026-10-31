@@ -9,7 +9,7 @@ tags:
 cssclasses:
   - paper-note
   - paper-index
-updated: 2026-10-29
+updated: 2026-10-31
 ---
 
 # Agentic RL：论文地图与阅读队列
@@ -18,18 +18,18 @@ updated: 2026-10-29
 
 > [!abstract] 阅读目标
 > 理解语言模型智能体如何规划、调用工具、处理长程反馈，以及如何通过强化学习改善策略。先分清推理时搜索、外部记忆更新、外部策略训练与 LLM 参数训练，再比较论文。
-> 已完成 6/19 篇：RAP、LATS、VOYAGER、Planner-R1、ToolRL、Memory-R1。原队列恢复位置：ARTIST。临时优先队列：AgeMem（完成）→Memory-R1（完成）→MemSkill→MemRL→LightMem；下一篇MemSkill。仅在完成实质精读并同步后标记完成。
+> 已完成 6/19 篇：RAP、LATS、VOYAGER、Planner-R1、ToolRL、Memory-R1。原队列恢复位置：ARTIST。临时优先队列：AgeMem（完成）→Memory-R1（完成）→MemSkill（完成）→MemRL→LightMem；下一篇MemRL。仅在完成实质精读并同步后标记完成。
 
 ## 临时优先队列（2026-10-26插队）
 
-用户要求先逐篇完成本组，再恢复原19篇；每次一篇。原队列6/19，恢复位置ARTIST。优先队列完成2/5：AgeMem、Memory-R1；原队列第10项同步标记完成。下一篇MemSkill。
+用户要求先逐篇完成本组，再恢复原19篇；每次一篇。原队列6/19，恢复位置ARTIST。优先队列完成3/5：AgeMem、Memory-R1、MemSkill；原队列第10项已同步标记完成。本次论文MemSkill，下一篇MemRL，之后LightMem。
 
 | 顺序 | 论文/定位编号 | 状态 |
 | --- | --- | --- |
 | 1 | [[AgeMem-2026-Unified-LTM-STM-Policy-RL\|AgeMem]]，2601.01885 | 完成精读；ACL 2026主会长论文 |
 | 2 | [[Memory-R1-2026-RL-Memory-Management-Utilization\|Memory-R1]]，2508.19828 | 完成精读；ACL 2026主会长论文；原队列第10项同步完成 |
-| 3 | MemSkill，2602.02474 | 下一篇，题名/身份待核验 |
-| 4 | MemRL，2601.03192 | 待读，题名/身份待核验 |
+| 3 | [[MemSkill-2026-Evolving-Memory-Skills-PPO\|MemSkill]]，2602.02474 | 完成精读；已核验NeurIPS 2026 TTCL Workshop Poster，主会身份未独立核验；实读arXiv v2 |
+| 4 | MemRL，2601.03192 | 下一篇，题名/身份待核验 |
 | 5 | LightMem，2510.18866 | 待读，题名/身份待核验 |
 
 [AgeMem完整笔记](AgeMem-2026-Unified-LTM-STM-Policy-RL.md)。四篇新增项不计入原19篇分母；Memory-R1提前读完后不重复推荐。论文内容已完成与远程同步状态分开记录，不以本地完成冒充推送成功。
@@ -49,6 +49,16 @@ updated: 2026-10-29
 - **教学与评测**：Memory Distillation不是参数蒸馏；LongMemEval用oracle。GRPO优于同架构SFT，PPO不全面优于SFT；正式PDF和HTML列名、24/50轮与切分比例冲突保留。
 - **与AgeMem**：本文分工学习写库与读库；AgeMem统一LTM/STM六工具，并制造上下文重置压力。两者不都等同跨任务事实永久积累。
 
+### MemSkill补充的理解
+
+- **两个库**：记忆库存当前历史的内容，技能库存跨历史共享的“如何提取/修改记忆”指南，不能混为经验事实。
+- **两种优化**：PPO训练小型MLP选择有序Top-K技能；冻结设计者LLM编辑技能文字。执行与回答LLM不更新权重，底层仍为固定INSERT/UPDATE/DELETE/NOOP。
+- **执行边界**：系统固定检索，控制器不生成检索query；训练按session、推理可按512 token片段，K与span也是部署配置。
+- **loss与实现**：核对有序无放回概率、GAE、裁剪actor、critic与熵；代码另有过程分、终局重分配及近似探索偏置，与正文默认存在差异。
+- **证据与成本**：消融支持学习选择和技能进化的组合；部署成本表不含前期训练/设计者开销，未证明全生命周期更便宜。独立MLP技能RL不同于AgeMem/Memory-R1的LLM参数RL。
+
+[MemSkill完整笔记](MemSkill-2026-Evolving-Memory-Skills-PPO.md)。新增项不计入原19篇分母；下一篇MemRL，优先队列结束后仍从ARTIST恢复。
+
 ## 已完成论文
 
 | 笔记 | 发表 | 类别 | 核心机制 | 改变什么 |
@@ -59,6 +69,7 @@ updated: 2026-10-29
 | [[Planner-R1-2025-Reward-Shaping-Agentic-RL\|Planner-R1]] | arXiv 2025 预印本 | LLM参数RL、规划、工具、奖励塑形 | 终局Schema门控、约束部分得分、GRPO | LLM策略权重；无长期技能库，配置/正文聚合差异保留 |
 | [[ToolRL-2025-Structured-Tool-Reward-GRPO\|ToolRL]] | NeurIPS 2025 主会 | 工具调用、结构奖励、LLM参数RL | 工具名/参数key/值分解奖励与GRPO，单步历史条件化训练 | LLM权重；保留默认源码奖励KL/熵、匹配及评测差异 |
 | [[Memory-R1-2026-RL-Memory-Management-Utilization\|Memory-R1]] | ACL 2026主会长论文 | 外部记忆维护、证据筛选、PPO/GRPO | 冻结对方分别训练两角色，以最终答案EM监督；Memory Distillation是生成时选证据 | 两种LLM策略参数与部署外部库；无专用源码，保留数据/目标/结果冲突 |
+| [[MemSkill-2026-Evolving-Memory-Skills-PPO\|MemSkill]] | NeurIPS 2026 TTCL Workshop Poster（主会未独立核验）；实读arXiv v2 | 外部选择器PPO、可演化记忆技能 | 状态—技能共享评分器选择Top-K，冻结LLM生成记忆；设计者从困难案例增修技能 | MLP控制器参数、技能文字和实例记忆内容；不训练LLM |
 
 [在 GitHub 阅读 RAP](RAP-2023-Reasoning-via-Planning.md) · [LATS 精读](LATS-2024-Language-Agent-Tree-Search.md) · [VOYAGER 精读](VOYAGER-2024-Executable-Skill-Lifelong-Agent.md) · [Planner-R1 精读](Planner-R1-2025-Reward-Shaping-Agentic-RL.md) · [ToolRL 精读](ToolRL-2025-Structured-Tool-Reward-GRPO.md)
 
@@ -190,3 +201,5 @@ RAP 中树节点表示任务状态，AFlow 的搜索节点表示工作流候选�
 
 
 2026-10-29（Memory-R1）：完成ACL 2026主会21页正式稿与A–G附录精读，核对作者仓库9c413a2尚无训练实现；渲染检查式(2)/(3)、表1及算法3–5。新增单篇笔记，同步标记优先队列第2项与原队列第10项；优先2/5、原队列6/19，下一篇MemSkill，恢复原队列位置ARTIST。不修改定时日程，不声称已GPU复现。
+
+2026-10-31：完成MemSkill arXiv v2全部33页和附录A–F，静态核对作者代码f65b797的状态/联合Top-K概率、PPO/GAE、过程奖励与终局重分配、技能进化、评测和数据切分。运行纯CPU的奖励与概率检查，未GPU训练或调用付费API。已核验OpenReview TTCL Workshop Poster，主会身份未独立核验；保留正文/代码及ALFWorld基线比较差异。优先队列3/5，下一篇MemRL；原19篇仍6/19，恢复ARTIST。

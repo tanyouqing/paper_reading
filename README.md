@@ -28,6 +28,8 @@ cssclasses:
 
 - [[Memory-R1-2026-RL-Memory-Management-Utilization|Memory-R1]]：ACL 2026主会，分别训练外部库维护与回答证据筛选；含EM奖励、论文loss及oracle评测边界。
 
+- [[MemSkill-2026-Evolving-Memory-Skills-PPO|MemSkill]]：训练小型PPO技能选择器，冻结LLM执行、设计者进化记忆指南；含有序Top-K概率、实际loss与成本边界。
+
 - [[CB-PbRL-2026-Constrained-Bilevel-Preference-RL|CB-PbRL]]：队列外精读；基于上传的CB-RLHF全文，整理多维偏好、约束双层优化、MuJoCo实验与理论边界；另注明NeurIPS录用版本。
 
 - [[00-Agent-Memory-Experience-Reuse|智能体记忆与经验复用 · 论文索引]]：论文分类、核心总结与比较。
@@ -56,6 +58,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 - [ToolRL 精读](Agentic%20RL/ToolRL-2025-Structured-Tool-Reward-GRPO.md)
 - [AgeMem 精读](Agentic%20RL/AgeMem-2026-Unified-LTM-STM-Policy-RL.md)
 - [Memory-R1 精读](Agentic%20RL/Memory-R1-2026-RL-Memory-Management-Utilization.md)
+- [MemSkill 精读](Agentic%20RL/MemSkill-2026-Evolving-Memory-Skills-PPO.md)
 - [CB-PbRL 补充笔记](Agentic%20RL/CB-PbRL-2026-Constrained-Bilevel-Preference-RL.md)
 - [论文索引](Agent%20Memory%26Experience%20Reuse/00-Agent-Memory-Experience-Reuse.md)
 - [AFlow 精读](Agent%20Memory%26Experience%20Reuse/AFlow-2025-Workflow-Optimization.md)
@@ -77,7 +80,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 每篇精读重点说明出发点、创新、架构、方法、输入输出、benchmark、评测与局限。论文事实、代码行为、教学例子和研究逻辑重建分开标识；不把推测写成作者结论。
 
-新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的十一篇论文（含BudgetWeb评测研究）及 Agentic RL 主题的 RAP、LATS、VOYAGER、Planner-R1、ToolRL、Memory-R1 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。原19篇队列进度为6/19，恢复位置ARTIST；临时优先队列AgeMem→Memory-R1→MemSkill→MemRL→LightMem先行。AgeMem、Memory-R1已完成精读并入库，优先队列2/5；下一篇MemSkill。Memory-R1同步计入原队列第10项，恢复时跳过。
+新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的十一篇论文（含BudgetWeb评测研究）及 Agentic RL 主题的 RAP、LATS、VOYAGER、Planner-R1、ToolRL、Memory-R1 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。原19篇队列进度为6/19，恢复位置ARTIST；临时优先队列AgeMem→Memory-R1→MemSkill→MemRL→LightMem先行。AgeMem、Memory-R1、MemSkill已完成精读并入库，优先队列3/5；下一篇MemRL。MemSkill已核验NeurIPS 2026 TTCL Workshop Poster，主会身份未独立核验。Memory-R1同步计入原队列第10项，恢复时跳过。
 
 ## 内容维护规范
 
