@@ -8,14 +8,14 @@ tags:
 cssclasses:
   - paper-note
   - paper-index
-updated: 2026-10-30
+updated: 2026-11-01
 ---
 
 # Agent Memory & Experience Reuse
 
 > [!abstract] 这组笔记研究什么？
 > 如何让智能体从执行与评测中积累经验，并把经验转化为**更好的执行流程**或**下一次任务可用的记忆**。
-> 当前收录 11 篇完整精读：AFlow、AWM、G-Memory、GPTSwarm、MemEvolve、EvolveR、EvoCF、NSI、ADAS、MaAS、BudgetWeb（评测研究，笔记简称）。AFlow/AWM/G-Memory/GPTSwarm/MemEvolve/EvoCF/NSI/ADAS 改善模型外部系统；EvolveR 将外部原则记忆与 GRPO 参数训练结合。注意：GPTSwarm 的 RL 训练连边参数，EvolveR 的 RL 训练 LLM 策略参数。
+> 当前收录 12 篇完整精读：AFlow、AWM、G-Memory、GPTSwarm、MemEvolve、EvolveR、EvoCF、NSI、ADAS、MaAS、BudgetWeb（评测研究，笔记简称）、PolySkill。AFlow/AWM/G-Memory/GPTSwarm/MemEvolve/EvoCF/NSI/ADAS 改善模型外部系统；EvolveR 将外部原则记忆与 GRPO 参数训练结合。注意：GPTSwarm 的 RL 训练连边参数，EvolveR 的 RL 训练 LLM 策略参数。
 
 ## 论文索引
 
@@ -32,6 +32,7 @@ updated: 2026-10-30
 | [[ADAS-2025-Automated-Agentic-System-Design\|ADAS / Meta Agent Search]] | ICLR 2025 主会 | 系统设计自动化、代码搜索、设计档案 | 读取已有系统代码与验证分数，生成新的任务处理程序；含设计逻辑、真实五调用例子与评测审计 | 外部程序、提示词、模块信息流 |
 | [[MaAS-2025-Cost-Aware-Agentic-Supernet\|MaAS]] | ICML 2025 主会 | 按题路由、成本约束、超网、外部控制器训练 | 根据题目选择算子组合和深度，用答题反馈与成本训练控制器；含目标/代码差异和迁移边界 | 路由参数、算子程序与提示词 |
 | [[BudgetWeb-2026-Online-Memory-Token-Audit\|BudgetWeb]] | EMNLP 2026 主会 | 在线记忆/技能评测、完整成本、稳定性 | 把增强模块的token用于普通actor多交互，检验在线复用的净收益；含验证与补救混淆、代码边界 | 评测协议与成本对照 |
+| [[PolySkill-2026-Polymorphic-Skill-Transfer\|PolySkill]] | ICLR 2026 主会 | 可执行技能、抽象接口、跨网站迁移、持续学习 | 将共同功能与网站实现分离，复用上层组合并适配新站；含静态/在线迁移、成本与代码缺口 | 外部技能接口、网站子类与组合 |
 
 ## 延伸资料
 
@@ -41,7 +42,7 @@ updated: 2026-10-30
 
 [[README|← 仓库主页]]
 
-## 十个学习闭环与一个评测视角
+## 十一个学习闭环与一个评测视角
 
 **AFlow：改进“以后如何做这一类题”。** 一个候选工作流在很多验证题上执行，评测结果指导下一次工作流修改。最后产物是可复用的执行程序。
 
@@ -64,6 +65,8 @@ updated: 2026-10-30
 **MaAS：改进“这道题值得用哪些操作”。** 学习题目条件化的外部控制器，用正确率和API成本选择算子与深度；没有技能迁移可靠性保证。
 
 **BudgetWeb：检验“这些学习闭环是否值得”。** 在线增强的全部模块与上下文token都应计入成本，并与普通actor增加操作机会比较；这是评测研究，没有新记忆架构。
+
+**PolySkill：改进“同类新网站上哪些结构可以沿用”。** 将领域接口、站点实现和组合方法分开；新站仍需学会底层实现，调用比例不是迁移成功概率。
 
 | 比较轴 | AFlow | G-Memory | AWM |
 | --- | --- | --- | --- |
@@ -134,9 +137,17 @@ updated: 2026-10-30
 - **结论边界**：十步对十五步是近似预算，不是逐题硬约束；在线网页结果不能直接否定离线库、长部署摊销或记忆依赖任务。三次重复旧任务也不是新变体泛化保证。
 - **与MaAS**：MaAS学习成本路由；BudgetWeb检验是否需要增强模块。两者都没有完成迁移技能的独立可靠性验证。
 
+## PolySkill 补上的比较维度
+
+- **出发点与表示**：同类网站有共同目标但不同页面实现；借用多态隔离变化，让上层组合只依赖抽象方法。
+- **迁移含义**：主要复用接口/组合，网站实现仍需适配；+Update不能当成零适配迁移。静态GPT跨域60.1低于无技能62.3。
+- **验证与指标**：沿用原题回合验证的论文描述；技能被调用过的比例不等于新变体可靠性，没有语义契约保证。
+- **成本与证据**：动作生成token降低10.2%，总token增加14.1%对无技能。正式表6增量、表8部分平均和复用率叙述存在冲突；公开重写版本的验证/持久化/动作注册还需补齐。
+- **与NSI/BudgetWeb**：NSI强调技能内部状态分支，PolySkill强调跨站实现隔离；BudgetWeb提示还需普通actor的等预算对照。
+
 ## 与研究设想的对应
 
-- **经验优化 Harness**：MaAS优化按题计算分配；BudgetWeb提供在线增强的成本对照原则；ADAS直接搜索任务处理程序；NSI直接归纳并修改技能程序；AFlow、GPTSwarm 与 MemEvolve 直接相关；G-Memory 提供可迁移的经验整理机制。
+- **经验优化 Harness**：PolySkill直接组织与更新技能接口/实现；MaAS优化按题计算分配；BudgetWeb提供在线增强的成本对照原则；ADAS直接搜索任务处理程序；NSI直接归纳并修改技能程序；AFlow、GPTSwarm 与 MemEvolve 直接相关；G-Memory 提供可迁移的经验整理机制。
 - **长期记忆与检索**：EvolveR 直接相关；G-Memory 与 AWM 直接相关：前者组织多粒度经验，后者提炼程序性子流程；AFlow 的经验主要服务搜索器。
 - **多智能体协作**：EvoCF 直接修订联合动作与分工，但没有通信拓扑学习；GPTSwarm 直接学习信息连接；AFlow 可以改变调用与控制流程；G-Memory 可以给团队成员提供历史指导，但公开实现中角色投影是可选项。
 - **RL / 参数蒸馏**：GPTSwarm 用 REINFORCE 优化外部连边；EvolveR 用 GRPO 更新 LLM。EvolveR 默认只对生成动作计算策略损失，经验仍作为外部上下文；取消经验 mask 的消融不等于标准知识蒸馏。
@@ -150,6 +161,7 @@ updated: 2026-10-30
 > 再读 [[NSI-2026-Logic-Grounded-Skill-Induction|NSI]]，对照文字经验与解释器执行技能，重点看历史一致性与在线图修复。
 > 补读 [[ADAS-2025-Automated-Agentic-System-Design|ADAS]]，先理解从人工设计到系统搜索的出发点，再看真实五调用程序与评测协议；与AFlow对照而非当成新型任务记忆。
 > 补读 [[MaAS-2025-Cost-Aware-Agentic-Supernet|MaAS]] 的按题计算分配，再读 [[BudgetWeb-2026-Online-Memory-Token-Audit|BudgetWeb]]，检查增加模块是否优于把预算用来多操作，以及技能验证和actor补救是否混淆。
+> 接着读 [[PolySkill-2026-Polymorphic-Skill-Transfer|PolySkill]]，理解共同接口不等于相同执行代码，重点检查新站适配、验证证据和成本摊销。
 > 对代码感兴趣，优先看各篇的“实现边界 / 代码核对”部分；对实验感兴趣，先看 benchmark 表，明确分数到底测什么。
 
 ## 共同的阅读检查表
@@ -166,4 +178,4 @@ updated: 2026-10-30
 > [!info] 证据标签
 > **论文**：原文明示的方法或实验；**代码核对**：公开实现中的具体行为；**解释例子**：为教学构造的例子；**研究逻辑重建**：依据问题与方法组织的设计理由，不代表作者未公开的真实心理过程。
 
-每篇末尾保留原始来源。代码链接指向公开仓库，行为可能随版本改变；最近更新日期为 2026-10-30。所有双向链接、Callout、Mermaid、公式与 YAML 属性均采用 Obsidian 原生支持的写法，不依赖 Dataview 等插件。
+每篇末尾保留原始来源。代码链接指向公开仓库，行为可能随版本改变；最近更新日期为 2026-11-01。所有双向链接、Callout、Mermaid、公式与 YAML 属性均采用 Obsidian 原生支持的写法，不依赖 Dataview 等插件。
