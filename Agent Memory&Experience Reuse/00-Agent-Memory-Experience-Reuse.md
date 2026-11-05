@@ -8,14 +8,14 @@ tags:
 cssclasses:
   - paper-note
   - paper-index
-updated: 2026-11-03
+updated: 2026-11-05
 ---
 
 # Agent Memory & Experience Reuse
 
 > [!abstract] 这组笔记研究什么？
 > 如何让智能体从执行与评测中积累经验，并把经验转化为**更好的执行流程**或**下一次任务可用的记忆**。
-> 当前收录 13 篇完整精读：AFlow、AWM、G-Memory、GPTSwarm、MemEvolve、EvolveR、EvoCF、NSI、ADAS、MaAS、BudgetWeb（评测研究，笔记简称）、PolySkill、ReasoningBank。AFlow/AWM/G-Memory/GPTSwarm/MemEvolve/EvoCF/NSI/ADAS 改善模型外部系统；EvolveR 将外部原则记忆与 GRPO 参数训练结合。注意：GPTSwarm 的 RL 训练连边参数，EvolveR 的 RL 训练 LLM 策略参数。
+> 当前收录 14 篇完整精读：AFlow、AWM、G-Memory、GPTSwarm、MemEvolve、EvolveR、EvoCF、NSI、ADAS、MaAS、BudgetWeb（评测研究，笔记简称）、PolySkill、ReasoningBank、G-Designer。AFlow/AWM/G-Memory/GPTSwarm/MemEvolve/EvoCF/NSI/ADAS 改善模型外部系统；EvolveR 将外部原则记忆与 GRPO 参数训练结合。注意：GPTSwarm 的 RL 训练连边参数，EvolveR 的 RL 训练 LLM 策略参数。
 
 ## 论文索引
 
@@ -34,6 +34,7 @@ updated: 2026-11-03
 | [[BudgetWeb-2026-Online-Memory-Token-Audit\|BudgetWeb]] | EMNLP 2026 主会 | 在线记忆/技能评测、完整成本、稳定性 | 把增强模块的token用于普通actor多交互，检验在线复用的净收益；含验证与补救混淆、代码边界 | 评测协议与成本对照 |
 | [[PolySkill-2026-Polymorphic-Skill-Transfer\|PolySkill]] | ICLR 2026 主会 | 可执行技能、抽象接口、跨网站迁移、持续学习 | 将共同功能与网站实现分离，复用上层组合并适配新站；含静态/在线迁移、成本与代码缺口 | 外部技能接口、网站子类与组合 |
 | [[ReasoningBank-2026-Reasoning-Memory-Experience-Scaling\|ReasoningBank]] | ICLR 2026 主会 | 成败经验、推理策略、记忆感知扩展计算 | 从成败轨迹提炼文字策略，同题多次尝试对照归纳；含top-1任务检索、完整成本与公开脚本边界 | 外部记忆内容与提示上下文 |
+| [[GDesigner-2025-Task-Conditioned-Communication-Graphs\|G-Designer]] | ICML 2025 主会 | 任务条件化通信图、外部策略梯度、图生成 | 根据题目和角色生成通信边，执行得分训练设计器；含VGAE/代码差异、分母与成本边界 | 外部图网络参数及团队信息流 |
 
 ## 延伸资料
 
@@ -43,7 +44,7 @@ updated: 2026-11-03
 
 [[README|← 仓库主页]]
 
-## 十二个学习闭环与一个评测视角
+## 十三个学习闭环与一个评测视角
 
 **AFlow：改进“以后如何做这一类题”。** 一个候选工作流在很多验证题上执行，评测结果指导下一次工作流修改。最后产物是可复用的执行程序。
 
@@ -70,6 +71,8 @@ updated: 2026-11-03
 **PolySkill：改进“同类新网站上哪些结构可以沿用”。** 将领域接口、站点实现和组合方法分开；新站仍需学会底层实现，调用比例不是迁移成功概率。
 
 **ReasoningBank：改进“多次探索能留下什么可复用的教训”。** 基础模型固定，从成败轨迹提炼决策原则；MaTTS将同题轨迹联合对照，改善后续经验。检索仍按历史任务相似度，维护仍是追加，没有迁移适用性证明。
+
+**G-Designer：改进“当前题目应该让谁读取谁”。** 训练以题目和角色为条件的图生成器，摊销结构设计计算；当前公开GCN采样器与论文完整VGAE/精化存在明显差距。
 
 | 比较轴 | AFlow | G-Memory | AWM |
 | --- | --- | --- | --- |
@@ -155,11 +158,18 @@ updated: 2026-11-03
 - **证据与成本**：WebArena Flash整体SR40.5→48.8；平均步数降低，但成本表总token50847.4→53054.5。MaTTS随机单条、LLM选优、Pass@k覆盖率是不同指标；其完整扩展成本不能套用基础表。
 - **实现与可靠性**：当前多轨迹归纳入口重复读取单目录、默认gt及客户端调用存在需修复路径；静态核对不是完整复现。策略迁移仍靠模型判断，没有新变体可靠性保证。
 
+## G-Designer 补上的比较维度
+
+- **出发点**：不同题目未必适合相同通信结构；把图设计从固定连边分布转为题目条件化生成。
+- **训练对象**：外部图网络用任务成绩学习；基础LLM固定，没有轨迹总结与长期经验检索，不是参数蒸馏。
+- **效率边界**：GSM8K对GPTSwarm总token约14M→8.5M，推理仅8.4M→8.2M，主要差距来自训练。删边、减少成员调用、减少总token必须分开。
+- **证据与实现**：任务节点消融支持条件化作用；当前公开主路径实际拼接query、GCN/MLP内积采样，无完整变分/核范数精化，且数据分母及默认模型/轮数不同。
+
 ## 与研究设想的对应
 
 - **经验优化 Harness**：PolySkill直接组织与更新技能接口/实现；MaAS优化按题计算分配；BudgetWeb提供在线增强的成本对照原则；ADAS直接搜索任务处理程序；NSI直接归纳并修改技能程序；AFlow、GPTSwarm 与 MemEvolve 直接相关；G-Memory 提供可迁移的经验整理机制。
 - **长期记忆与检索**：ReasoningBank直接相关，强调成败内容与多轨迹归纳；EvolveR 直接相关；G-Memory 与 AWM 直接相关：前者组织多粒度经验，后者提炼程序性子流程；AFlow 的经验主要服务搜索器。
-- **多智能体协作**：EvoCF 直接修订联合动作与分工，但没有通信拓扑学习；GPTSwarm 直接学习信息连接；AFlow 可以改变调用与控制流程；G-Memory 可以给团队成员提供历史指导，但公开实现中角色投影是可选项。
+- **多智能体协作**：G-Designer直接按题目生成通信边，但未保证迁移可靠性；EvoCF 直接修订联合动作与分工，但没有通信拓扑学习；GPTSwarm 直接学习信息连接；AFlow 可以改变调用与控制流程；G-Memory 可以给团队成员提供历史指导，但公开实现中角色投影是可选项。
 - **RL / 参数蒸馏**：GPTSwarm 用 REINFORCE 优化外部连边；EvolveR 用 GRPO 更新 LLM。EvolveR 默认只对生成动作计算策略损失，经验仍作为外部上下文；取消经验 mask 的消融不等于标准知识蒸馏。
 
 > [!tip] 阅读顺序
@@ -173,6 +183,7 @@ updated: 2026-11-03
 > 补读 [[MaAS-2025-Cost-Aware-Agentic-Supernet|MaAS]] 的按题计算分配，再读 [[BudgetWeb-2026-Online-Memory-Token-Audit|BudgetWeb]]，检查增加模块是否优于把预算用来多操作，以及技能验证和actor补救是否混淆。
 > 接着读 [[PolySkill-2026-Polymorphic-Skill-Transfer|PolySkill]]，理解共同接口不等于相同执行代码，重点检查新站适配、验证证据和成本摊销。
 > 再读 [[ReasoningBank-2026-Reasoning-Memory-Experience-Scaling|ReasoningBank]]，看文字策略与可执行技能的区别，并分清多次尝试的即时收益、记忆收益及完整token成本。
+> 接着读 [[GDesigner-2025-Task-Conditioned-Communication-Graphs|G-Designer]]，将全局连边优化、按题图生成与文字经验检索分开，并检查删边是否真的减少成员调用。
 > 对代码感兴趣，优先看各篇的“实现边界 / 代码核对”部分；对实验感兴趣，先看 benchmark 表，明确分数到底测什么。
 
 ## 共同的阅读检查表
