@@ -24,6 +24,8 @@ cssclasses:
 
 - [[ToolRL-2025-Structured-Tool-Reward-GRPO|ToolRL]]：NeurIPS 2025主会，工具调用结构奖励与GRPO；含单步训练、实际loss与默认KL/熵、评测边界。
 
+- [[ARTIST-2025-Agentic-Reasoning-Tool-RL|ARTIST]]：NeurIPS 2025 FoRLM Workshop，真实多步工具rollout与输出mask GRPO；含单用户回合、奖励/loss和表格结论边界。
+
 - [[AgeMem-2026-Unified-LTM-STM-Policy-RL|AgeMem]]：ACL 2026主会长论文，联合长期/短期记忆、多轮工具RL；已完成精读，含默认配置与论文差异。
 
 - [[Memory-R1-2026-RL-Memory-Management-Utilization|Memory-R1]]：ACL 2026主会，分别训练外部库维护与回答证据筛选；含EM奖励、论文loss及oracle评测边界。
@@ -63,6 +65,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 - [VOYAGER 精读](Agentic%20RL/VOYAGER-2024-Executable-Skill-Lifelong-Agent.md)
 - [Planner-R1 精读](Agentic%20RL/Planner-R1-2025-Reward-Shaping-Agentic-RL.md)
 - [ToolRL 精读](Agentic%20RL/ToolRL-2025-Structured-Tool-Reward-GRPO.md)
+- [ARTIST 精读](Agentic%20RL/ARTIST-2025-Agentic-Reasoning-Tool-RL.md)
 - [AgeMem 精读](Agentic%20RL/AgeMem-2026-Unified-LTM-STM-Policy-RL.md)
 - [Memory-R1 精读](Agentic%20RL/Memory-R1-2026-RL-Memory-Management-Utilization.md)
 - [MemSkill 精读](Agentic%20RL/MemSkill-2026-Evolving-Memory-Skills-PPO.md)
@@ -92,7 +95,7 @@ GitHub 不原生解析 Obsidian 双向链接，可从下列标准链接进入：
 
 每篇精读重点说明出发点、创新、架构、方法、输入输出、benchmark、评测与局限。论文事实、代码行为、教学例子和研究逻辑重建分开标识；不把推测写成作者结论。
 
-新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的十四篇论文（含BudgetWeb评测研究）及 Agentic RL 主题的 RAP、LATS、VOYAGER、Planner-R1、ToolRL、Memory-R1 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。原19篇队列进度为6/19，恢复位置ARTIST；临时优先队列AgeMem→Memory-R1→MemSkill→MemRL→LightMem已全部精读入库（5/5）；下次恢复原队列ARTIST，之后ToRL、GiGPO、ARPO。MemSkill已核验NeurIPS 2026 TTCL Workshop Poster，主会身份未独立核验。Memory-R1同步计入原队列第10项，恢复时跳过。
+新增论文时先检查仓库当前版本与索引，再新增独立笔记并更新主题索引。修改已有笔记保留用户内容与原始来源，注明重要更正。记忆主题的十四篇论文（含BudgetWeb评测研究）及 Agentic RL 主题的 RAP、LATS、VOYAGER、Planner-R1、ToolRL、ARTIST、Memory-R1 均已完成精读整理；原文通过各笔记的官方链接访问。CB-PbRL / CB-RLHF为队列外精读，已依据用户上传稿完成正文与附录整理；未逐页对照NeurIPS终稿，未取得补充源码。原19篇队列进度为7/19，下一篇ToRL；临时优先队列AgeMem→Memory-R1→MemSkill→MemRL→LightMem已全部精读入库（5/5）；已恢复原队列并完成ARTIST，下一篇ToRL，之后GiGPO、ARPO。MemSkill已核验NeurIPS 2026 TTCL Workshop Poster，主会身份未独立核验。Memory-R1同步计入原队列第10项，恢复时跳过。
 
 ## 内容维护规范
 
