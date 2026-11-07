@@ -8,14 +8,14 @@ tags:
 cssclasses:
   - paper-note
   - paper-index
-updated: 2026-11-05
+updated: 2026-11-07
 ---
 
 # Agent Memory & Experience Reuse
 
 > [!abstract] 这组笔记研究什么？
 > 如何让智能体从执行与评测中积累经验，并把经验转化为**更好的执行流程**或**下一次任务可用的记忆**。
-> 当前收录 14 篇完整精读：AFlow、AWM、G-Memory、GPTSwarm、MemEvolve、EvolveR、EvoCF、NSI、ADAS、MaAS、BudgetWeb（评测研究，笔记简称）、PolySkill、ReasoningBank、G-Designer。AFlow/AWM/G-Memory/GPTSwarm/MemEvolve/EvoCF/NSI/ADAS 改善模型外部系统；EvolveR 将外部原则记忆与 GRPO 参数训练结合。注意：GPTSwarm 的 RL 训练连边参数，EvolveR 的 RL 训练 LLM 策略参数。
+> 当前收录 15 篇完整精读：AFlow、AWM、G-Memory、GPTSwarm、MemEvolve、EvolveR、EvoCF、NSI、ADAS、MaAS、BudgetWeb（评测研究，笔记简称）、PolySkill、ReasoningBank、G-Designer。AFlow/AWM/G-Memory/GPTSwarm/MemEvolve/EvoCF/NSI/ADAS 改善模型外部系统；EvolveR 将外部原则记忆与 GRPO 参数训练结合。注意：GPTSwarm 的 RL 训练连边参数，EvolveR 的 RL 训练 LLM 策略参数。
 
 ## 论文索引
 
@@ -35,6 +35,7 @@ updated: 2026-11-05
 | [[PolySkill-2026-Polymorphic-Skill-Transfer\|PolySkill]] | ICLR 2026 主会 | 可执行技能、抽象接口、跨网站迁移、持续学习 | 将共同功能与网站实现分离，复用上层组合并适配新站；含静态/在线迁移、成本与代码缺口 | 外部技能接口、网站子类与组合 |
 | [[ReasoningBank-2026-Reasoning-Memory-Experience-Scaling\|ReasoningBank]] | ICLR 2026 主会 | 成败经验、推理策略、记忆感知扩展计算 | 从成败轨迹提炼文字策略，同题多次尝试对照归纳；含top-1任务检索、完整成本与公开脚本边界 | 外部记忆内容与提示上下文 |
 | [[GDesigner-2025-Task-Conditioned-Communication-Graphs\|G-Designer]] | ICML 2025 主会 | 任务条件化通信图、外部策略梯度、图生成 | 根据题目和角色生成通信边，执行得分训练设计器；含VGAE/代码差异、分母与成本边界 | 外部图网络参数及团队信息流 |
+| [[GTD-2026-Guided-Topology-Diffusion\|GTD]] | ACL 2026 主会长论文 | 图扩散、代理奖励、任务条件化通信拓扑 | 从噪声图逐步去噪，每一步用proxy选择候选，输出当前任务的有向通信图 | 外部扩散生成器与proxy参数、团队信息流；不更新LLM权重 |
 
 ## 延伸资料
 
@@ -44,7 +45,7 @@ updated: 2026-11-05
 
 [[README|← 仓库主页]]
 
-## 十三个学习闭环与一个评测视角
+## 十四个学习闭环与一个评测视角
 
 **AFlow：改进“以后如何做这一类题”。** 一个候选工作流在很多验证题上执行，评测结果指导下一次工作流修改。最后产物是可复用的执行程序。
 
@@ -73,6 +74,8 @@ updated: 2026-11-05
 **ReasoningBank：改进“多次探索能留下什么可复用的教训”。** 基础模型固定，从成败轨迹提炼决策原则；MaTTS将同题轨迹联合对照，改善后续经验。检索仍按历史任务相似度，维护仍是追加，没有迁移适用性证明。
 
 **G-Designer：改进“当前题目应该让谁读取谁”。** 训练以题目和角色为条件的图生成器，摊销结构设计计算；当前公开GCN采样器与论文完整VGAE/精化存在明显差距。
+
+**GTD：改进“如何逐步构造并筛选当前任务的通信图”。** 在图扩散每一步采样候选，再用代理模型估计utility/cost做零阶选择；比单步条件图生成多了逐步引导，但当前仍是任务开始前生成一次固定图，没有经验记忆和执行中重连。
 
 | 比较轴 | AFlow | G-Memory | AWM |
 | --- | --- | --- | --- |
@@ -165,11 +168,22 @@ updated: 2026-11-05
 - **效率边界**：GSM8K对GPTSwarm总token约14M→8.5M，推理仅8.4M→8.2M，主要差距来自训练。删边、减少成员调用、减少总token必须分开。
 - **证据与实现**：任务节点消融支持条件化作用；当前公开主路径实际拼接query、GCN/MLP内积采样，无完整变分/核范数精化，且数据分母及默认模型/轮数不同。
 
+
+
+## GTD 补上的比较维度
+
+- **相对 G-Designer**：两者都按题目条件化生成通信图；G-Designer使用任务条件化图网络/VGAE式设计，GTD将邻接矩阵作为扩散对象，在每一步去噪时用proxy选择候选。它不是“记忆图”或轨迹检索图，而是直接决定消息可见性的执行图。
+- **相对 GPTSwarm**：GPTSwarm用任务奖励学习连边概率；GTD学习条件扩散分布，并在推理时做候选图的零阶排序。两者都不训练基础LLM，但训练对象与推理时搜索方式不同。
+- **相对 MaAS**：MaAS按题选择算子/执行深度，GTD按题选择 agent 间通信边；二者都使用成本意识，但优化粒度不同。
+- **多目标边界**：论文动机提到效用、成本、稀疏与鲁棒性；实际采样公式是固定权重的utility-cost标量化。公开代码的cost标签是边数，robustness单独评测，不能说proxy直接学了所有目标。
+- **在线性边界**：每题开始前生成一次图；没有基于任务中途新反馈的重连，也没有轨迹经验库。执行反馈主要用于离线构造图—任务—奖励训练数据。
+- **实验可信度**：50个训练任务、每题六种基线图；proxy在OOD拓扑上的Top-1排序准确率72.8%。这提示需要任务族级划分、代理校准与真实token成本监督。
+
 ## 与研究设想的对应
 
 - **经验优化 Harness**：PolySkill直接组织与更新技能接口/实现；MaAS优化按题计算分配；BudgetWeb提供在线增强的成本对照原则；ADAS直接搜索任务处理程序；NSI直接归纳并修改技能程序；AFlow、GPTSwarm 与 MemEvolve 直接相关；G-Memory 提供可迁移的经验整理机制。
 - **长期记忆与检索**：ReasoningBank直接相关，强调成败内容与多轨迹归纳；EvolveR 直接相关；G-Memory 与 AWM 直接相关：前者组织多粒度经验，后者提炼程序性子流程；AFlow 的经验主要服务搜索器。
-- **多智能体协作**：G-Designer直接按题目生成通信边，但未保证迁移可靠性；EvoCF 直接修订联合动作与分工，但没有通信拓扑学习；GPTSwarm 直接学习信息连接；AFlow 可以改变调用与控制流程；G-Memory 可以给团队成员提供历史指导，但公开实现中角色投影是可选项。
+- **多智能体协作**：G-Designer直接按题目生成通信边；GTD进一步用图扩散和逐步proxy引导生成任务专属图，但仍在任务开始前固定拓扑；二者均未建立跨任务经验检索与执行中重连。EvoCF 直接修订联合动作与分工，但没有通信拓扑学习；GPTSwarm 直接学习信息连接；AFlow 可以改变调用与控制流程；G-Memory 可以给团队成员提供历史指导，但公开实现中角色投影是可选项。
 - **RL / 参数蒸馏**：GPTSwarm 用 REINFORCE 优化外部连边；EvolveR 用 GRPO 更新 LLM。EvolveR 默认只对生成动作计算策略损失，经验仍作为外部上下文；取消经验 mask 的消融不等于标准知识蒸馏。
 
 > [!tip] 阅读顺序
@@ -184,6 +198,7 @@ updated: 2026-11-05
 > 接着读 [[PolySkill-2026-Polymorphic-Skill-Transfer|PolySkill]]，理解共同接口不等于相同执行代码，重点检查新站适配、验证证据和成本摊销。
 > 再读 [[ReasoningBank-2026-Reasoning-Memory-Experience-Scaling|ReasoningBank]]，看文字策略与可执行技能的区别，并分清多次尝试的即时收益、记忆收益及完整token成本。
 > 接着读 [[GDesigner-2025-Task-Conditioned-Communication-Graphs|G-Designer]]，将全局连边优化、按题图生成与文字经验检索分开，并检查删边是否真的减少成员调用。
+> 然后读 [[GTD-2026-Guided-Topology-Diffusion|GTD]]，对照单步图生成与逐步图扩散，重点检查proxy的成本标签、OOD排序和任务内是否允许重连。
 > 对代码感兴趣，优先看各篇的“实现边界 / 代码核对”部分；对实验感兴趣，先看 benchmark 表，明确分数到底测什么。
 
 ## 共同的阅读检查表
